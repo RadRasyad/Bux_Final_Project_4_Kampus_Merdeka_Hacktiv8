@@ -11,4 +11,13 @@
     <color name="secondary">#FFD03D</color>
     <color name="secondaryVariant">#F1C539</color>
 
+    <color name="lightGrey">#EAEAEA</color>
+    <color name="textGrey">#808080</color>
+    <color name="secondaryGrey">#D8D8D8</color>
+
+    <!--  font color  -->
+    <color name="title">#0A0A0A</color>
+    <color name="subtitle">#2B2B2B</color>
+    <color name="text">#ADADAD</color>
+    <color name="label">#585858</color>
 </resources>
