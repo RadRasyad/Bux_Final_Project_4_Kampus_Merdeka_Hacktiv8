@@ -13,9 +13,17 @@
         android:theme="@style/Theme.Bux"
         tools:targetApi="31">
         <activity
+            android:name=".ui.loginregister.FinishRegisActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Bux.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.loginregister.SetupPhoneActivity"
-            android:theme="@style/Theme.Bux.NoActionBar"
-            android:exported="false" >
+            android:exported="false"
+            android:theme="@style/Theme.Bux.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -37,6 +45,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -44,6 +53,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:theme="@style/Theme.Bux.NoActionBar"
             android:label="@string/app_name">
             <meta-data
                 android:name="android.app.lib_name"

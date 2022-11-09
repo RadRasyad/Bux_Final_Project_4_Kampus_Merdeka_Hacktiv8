@@ -1,26 +1,24 @@
-package com.hacktiv8.bux.ui.home;
+package com.hacktiv8.bux.ui.ticket;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.hacktiv8.bux.databinding.FragmentHomeBinding;
+import com.hacktiv8.bux.databinding.FragmentTicketBinding;
 
-public class HomeFragment extends Fragment {
+public class TicketFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentTicketBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentTicketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         return root;
     }
 
