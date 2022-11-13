@@ -20,4 +20,6 @@
     <color name="subtitle">#2B2B2B</color>
     <color name="text">#ADADAD</color>
     <color name="label">#585858</color>
+
+    <color name="icon">#E94852</color>
 </resources>
