@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.hacktiv8.bux.databinding.FragmentProfileBinding;
 

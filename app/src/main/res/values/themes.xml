@@ -18,4 +18,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.Bux.Backbutton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>

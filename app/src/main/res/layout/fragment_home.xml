@@ -185,7 +185,6 @@
                 android:layout_toRightOf="@+id/passangersEd"
                 android:background="@drawable/underline" />
 
-
             <ImageView
                 android:id="@+id/streetImg"
                 android:layout_width="wrap_content"

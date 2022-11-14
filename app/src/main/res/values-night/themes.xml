@@ -19,4 +19,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.Bux.Backbutton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@color/black</item>
+    </style>
+
 </resources>
