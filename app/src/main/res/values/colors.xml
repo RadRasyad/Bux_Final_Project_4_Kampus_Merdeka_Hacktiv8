@@ -14,6 +14,8 @@
     <color name="lightGrey">#EAEAEA</color>
     <color name="textGrey">#808080</color>
     <color name="secondaryGrey">#D8D8D8</color>
+    <color name="grayEd">#EDEDED</color>
+    <color name="gray64">#646464</color>
 
     <!--  font color  -->
     <color name="title">#0A0A0A</color>

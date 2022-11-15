@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Bux"
         tools:targetApi="31">
         <activity
+            android:name=".SeatChooserActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.bus.BusDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Bux.NoActionBar">
