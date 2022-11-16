@@ -21,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
 
         int time = 3000;
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashScreen.this, LoginRegisterActivity.class);
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
             startActivity(intent);
             finish();
         }, time);

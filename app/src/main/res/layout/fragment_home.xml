@@ -52,8 +52,8 @@
                 android:textColor="@color/label"
                 android:textSize="12dp" />
 
-            <EditText
-                android:id="@+id/dapartureEd"
+            <TextView
+                android:id="@+id/daparture"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@+id/dapartureTv"
@@ -62,7 +62,8 @@
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="15dp"
-                android:hint="Departure"
+                android:text="@string/str_try_departure"
+                android:textColor="@color/primary"
                 android:paddingStart="10dp"
                 android:paddingEnd="12dp"
                 android:textSize="14sp" />
@@ -70,7 +71,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dapartureEd"
+                android:layout_below="@+id/daparture"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="-20dp"
                 android:background="@drawable/underline" />
@@ -80,7 +81,7 @@
                 android:id="@+id/arrivalTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dapartureEd"
+                android:layout_below="@+id/daparture"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="20dp"
                 android:text="Arrival"
@@ -88,8 +89,8 @@
                 android:textSize="12dp" />
 
 
-            <EditText
-                android:id="@+id/arrivalEd"
+            <TextView
+                android:id="@+id/arrival"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@+id/arrivalTv"
@@ -98,7 +99,8 @@
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_arrival"
                 android:drawablePadding="15dp"
-                android:hint="Arrival"
+                android:text="@string/str_try_arrival"
+                android:textColor="@color/primary"
                 android:paddingStart="10dp"
                 android:paddingEnd="12dp"
                 android:textSize="14sp" />
@@ -106,7 +108,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/arrivalEd"
+                android:layout_below="@+id/arrival"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="-20dp"
                 android:background="@drawable/underline" />
@@ -115,7 +117,7 @@
                 android:id="@+id/passangersTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/arrivalEd"
+                android:layout_below="@+id/arrival"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="20dp"
                 android:text="Passangers"
@@ -123,8 +125,8 @@
                 android:textSize="12dp" />
 
 
-            <EditText
-                android:id="@+id/passangersEd"
+            <TextView
+                android:id="@+id/passangers"
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/passangersTv"
@@ -141,7 +143,7 @@
             <TextView
                 android:layout_width="95dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/passangersEd"
+                android:layout_below="@+id/passangers"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="-20dp"
                 android:background="@drawable/underline" />
@@ -151,23 +153,23 @@
                 android:id="@+id/dateTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/arrivalEd"
+                android:layout_below="@+id/arrival"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/passangersEd"
+                android:layout_toRightOf="@id/passangers"
                 android:text="Date"
                 android:textColor="@color/label"
                 android:textSize="12dp" />
 
 
-            <EditText
-                android:id="@+id/dateEd"
+            <TextView
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@+id/dateTv"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/passangersEd"
+                android:layout_toRightOf="@+id/passangers"
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_calender"
                 android:drawablePadding="15dp"
@@ -179,17 +181,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dateEd"
+                android:layout_below="@+id/date"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="-20dp"
-                android:layout_toRightOf="@+id/passangersEd"
+                android:layout_toRightOf="@+id/passangers"
                 android:background="@drawable/underline" />
 
             <ImageView
                 android:id="@+id/streetImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dapartureEd"
+                android:layout_below="@+id/daparture"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="-3dp"
                 android:src="@drawable/street" />
