@@ -24,4 +24,5 @@
     <color name="label">#585858</color>
 
     <color name="icon">#E94852</color>
+    <color name="bg">#F4F4F4</color>
 </resources>
