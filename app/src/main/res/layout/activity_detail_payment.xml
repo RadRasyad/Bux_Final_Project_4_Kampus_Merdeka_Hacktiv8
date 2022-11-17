@@ -66,8 +66,8 @@
                 android:id="@+id/underline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-4dp"
                 android:layout_below="@+id/name"
+                android:layout_marginTop="-4dp"
                 android:background="@drawable/underline" />
 
             <TextView
@@ -402,9 +402,9 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_below="@id/rtBiaya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/rtBiaya"
                 android:background="@color/primary"
                 android:padding="10dp">
 
@@ -424,10 +424,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginEnd="10dp"
+                    android:text="Rp 3.320.000"
                     android:textColor="@color/white"
                     android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:text="Rp 3.320.000"/>
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
