@@ -8,4 +8,14 @@
     <string name="str_try_departure">Try \"Semarang\"</string>
     <string name="str_try_arrival">Try \"Jepara\"</string>
     <string name="str_select_date">Select date</string>
+    <string name="payment">Payment</string>
+    <string name="total_payment">Total payment</string>
+    <string name="harga">Rp332.333,00</string>
+    <string name="note_total_payment">please select one of the payment method below</string>
+    <string name="bank_transfer">Bank transfer</string>
+    <string name="bni_mobile_banking">BNI Mobile banking</string>
+    <string name="select">select</string>
+    <string name="cimb_mobile_banking">CIMB Niaga Mobile banking</string>
+    <string name="credit_card">Credit card</string>
+    <string name="retail_payment">Retail payment</string>
 </resources>
