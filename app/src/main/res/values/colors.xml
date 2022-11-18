@@ -17,6 +17,8 @@
     <color name="grayEd">#EDEDED</color>
     <color name="gray64">#646464</color>
 
+    <color name="brown">#8C6F12</color>
+
     <!--  font color  -->
     <color name="title">#0A0A0A</color>
     <color name="subtitle">#2B2B2B</color>
