@@ -5,36 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F4"
-    tools:context=".ui.payment.PaymentMethod">
+    tools:context=".ui.payment.BankTransferActivity">
 
-   <com.google.android.material.appbar.AppBarLayout
-       android:id="@+id/appbar_layout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="@android:color/transparent"
-       app:elevation="0dp">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
-       <androidx.appcompat.widget.Toolbar
-           android:id="@+id/toolbar"
-           android:layout_width="match_parent"
-           android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
 
-           <ImageView
-               android:id="@+id/ivBackArrow"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:padding="8dp"
-               android:background="?selectableItemBackgroundBorderless"
-               android:src="@drawable/ic_round_arrow_back_24" />
+            <ImageView
+                android:id="@+id/ivBackArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_round_arrow_back_24" />
 
-           <TextView
-               style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:text="@string/payment" />
-       </androidx.appcompat.widget.Toolbar>
-   </com.google.android.material.appbar.AppBarLayout>
+            <TextView
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/payment" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:paddingHorizontal="17dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/Payment_cv"
+            android:id="@+id/totalPayment_cv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -62,9 +62,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="15dp"
                     android:text="@string/total_payment"
                     android:textColor="@color/text"
                     android:textSize="12sp"
@@ -114,12 +112,12 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/payment_method_tv"
+            android:id="@+id/bankTransfer_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="23dp"
             android:layout_marginTop="210dp"
-            android:text="Payment Method"
+            android:text="@string/bank_transfer"
             android:textColor="@color/title"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -127,34 +125,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/creditCard_cv"
+            android:id="@+id/bni_cv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/payment_method_tv">
+            app:layout_constraintTop_toBottomOf="@id/bankTransfer_tv">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/credit_tv"
+                    android:id="@+id/bni_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
-                    android:text="@string/credit_card"
+                    android:text="@string/bni_mobile_banking"
                     android:textColor="@color/text"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/select_credit_card"
+                    android:id="@+id/select_bni_mbanking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -176,111 +174,23 @@
                     android:src="@drawable/ic_angle" />
 
                 <TextView
-                    android:id="@+id/underline_credit_card"
+                    android:id="@+id/underline_bni"
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
-                    android:layout_below="@id/credit_tv"
+                    android:layout_below="@id/bni_tv"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/underline" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/underline_credit_card"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginBottom="13dp"
-                    android:src="@drawable/ic_visa" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/underline_credit_card"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="79dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginBottom="13dp"
-                    android:src="@drawable/ic_mastercard_logo" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bank_cv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/creditCard_cv">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/bank_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/bank_transfer"
-                    android:textColor="@color/text"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/select_bank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginEnd="36dp"
-                    android:text="@string/select"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="17dp"
-                    android:src="@drawable/ic_angle" />
-
-                <TextView
-                    android:id="@+id/underline_bank"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_below="@id/bank_tv"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/underline" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/underline_bank"
+                    android:layout_below="@id/underline_bni"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="13dp"
                     android:layout_marginBottom="13dp"
                     android:src="@drawable/ic_bank_bni" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/underline_bank"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="79dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginBottom="13dp"
-                    android:src="@drawable/ic_cimb_niaga" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -291,27 +201,27 @@
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bank_cv">
+            app:layout_constraintTop_toBottomOf="@id/bni_cv">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/retail_tv"
+                    android:id="@+id/cimbNiaga_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
-                    android:text="@string/retail_payment"
+                    android:text="@string/cimb_mobile_banking"
                     android:textColor="@color/text"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/select_retail"
+                    android:id="@+id/select_cimb_mBanking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -333,22 +243,22 @@
                     android:src="@drawable/ic_angle" />
 
                 <TextView
-                    android:id="@+id/underline_retail"
+                    android:id="@+id/underline_cimb"
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
-                    android:layout_below="@id/retail_tv"
+                    android:layout_below="@id/cimbNiaga_tv"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/underline" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/underline_retail"
+                    android:layout_below="@id/underline_cimb"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="13dp"
                     android:layout_marginBottom="13dp"
-                    android:src="@drawable/ic_alfamart" />
+                    android:src="@drawable/ic_cimb_niaga" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

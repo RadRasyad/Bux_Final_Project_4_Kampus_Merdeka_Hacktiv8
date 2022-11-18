@@ -15,4 +15,7 @@
     <string name="note_total_payment">Please select one of the payment method below</string>
     <string name="select">SELECT</string>
     <string name="retail_payment">Retail Payment</string>
+    <string name="bank_trandfer">Bank Transfer</string>
+    <string name="bni_mobile_banking">BNI Mobile Banking</string>
+    <string name="cimb_mobile_banking">CIMB Niaga Mobile Banking</string>
 </resources>

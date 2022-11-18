@@ -15,6 +15,14 @@
         android:theme="@style/Theme.Bux"
         tools:targetApi="31">
         <activity
+            android:name=".ui.payment.BankTransferActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Bux.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.payment.PaymentMethod"
             android:exported="false"
             android:theme="@style/Theme.Bux.NoActionBar">
