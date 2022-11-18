@@ -19,7 +19,7 @@ public class DatePickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDatePickerBinding.inflate(getLayoutInflater());
-
+        setContentView(binding.getRoot());
         Calendar calendar = Calendar.getInstance();
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
         binding.tvSelectedDate.setText(dateFormat.format(calendar.getTime()));
@@ -31,10 +31,19 @@ public class DatePickerActivity extends AppCompatActivity {
 
         binding.btnSearch.setOnClickListener(v -> {
             setResult(RESULT_OK, new Intent().putExtra("date", calendar));
+            onBackPressed();
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(0, 0);
+    }
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
     }
 }

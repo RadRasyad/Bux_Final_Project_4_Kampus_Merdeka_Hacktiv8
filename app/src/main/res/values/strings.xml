@@ -7,4 +7,5 @@
     <string name="profile">Profile</string>
     <string name="str_try_departure">Try \"Semarang\"</string>
     <string name="str_try_arrival">Try \"Jepara\"</string>
+    <string name="str_select_date">Select date</string>
 </resources>

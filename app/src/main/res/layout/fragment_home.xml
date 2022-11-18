@@ -43,7 +43,7 @@
             android:layout_marginEnd="20dp">
 
             <TextView
-                android:id="@+id/dapartureTv"
+                android:id="@+id/departureTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="55dp"
@@ -53,25 +53,25 @@
                 android:textSize="12dp" />
 
             <TextView
-                android:id="@+id/daparture"
+                android:id="@+id/departure"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_below="@+id/dapartureTv"
+                android:layout_below="@+id/departureTv"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="15dp"
-                android:text="@string/str_try_departure"
-                android:textColor="@color/primary"
                 android:paddingStart="10dp"
                 android:paddingEnd="12dp"
+                android:hint="@string/str_try_departure"
+                android:textColor="@color/primary"
                 android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/daparture"
+                android:layout_below="@+id/departure"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="-20dp"
                 android:background="@drawable/underline" />
@@ -81,7 +81,7 @@
                 android:id="@+id/arrivalTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/daparture"
+                android:layout_below="@+id/departure"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="20dp"
                 android:text="Arrival"
@@ -99,10 +99,10 @@
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_arrival"
                 android:drawablePadding="15dp"
-                android:text="@string/str_try_arrival"
-                android:textColor="@color/primary"
                 android:paddingStart="10dp"
                 android:paddingEnd="12dp"
+                android:hint="@string/str_try_arrival"
+                android:textColor="@color/primary"
                 android:textSize="14sp" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_calender"
                 android:drawablePadding="15dp"
-                android:hint="Date"
+                android:hint="@string/str_select_date"
                 android:paddingStart="10dp"
                 android:paddingEnd="12dp"
                 android:textSize="14sp" />
@@ -191,7 +191,7 @@
                 android:id="@+id/streetImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/daparture"
+                android:layout_below="@+id/departure"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="-3dp"
                 android:src="@drawable/street" />
