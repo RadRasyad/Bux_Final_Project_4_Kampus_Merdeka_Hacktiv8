@@ -17,16 +17,15 @@
         <activity
             android:name=".ui.payment.PaymentMethod"
             android:exported="false"
-            android:theme="@style/Theme.Bux.NoActionBar"/>
-        <activity
-            android:name=".ui.payment.DetailPaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.chooser.DestinationChooserActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.Bux.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ui.bus.SeatChooserActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Bux.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
