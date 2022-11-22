@@ -125,7 +125,7 @@
                 android:textSize="12dp" />
 
 
-            <TextView
+            <EditText
                 android:id="@+id/passangers"
                 android:layout_width="150dp"
                 android:layout_height="30dp"
@@ -134,6 +134,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_people_custom"
+                android:textColor="@color/primary"
                 android:drawablePadding="15dp"
                 android:hint="Passangers"
                 android:paddingStart="10dp"
@@ -170,6 +171,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/passangers"
+                android:textColor="@color/primary"
                 android:background="@drawable/custum_input"
                 android:drawableStart="@drawable/ic_calender"
                 android:drawablePadding="15dp"

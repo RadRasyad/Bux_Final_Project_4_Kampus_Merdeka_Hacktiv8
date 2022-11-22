@@ -56,5 +56,5 @@ dependencies {
     // https://github.com/umano/AndroidSlidingUpPanel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
-
+    implementation 'com.google.android.material:material:1.7.0'
 }
