@@ -124,7 +124,6 @@
                 android:textColor="@color/label"
                 android:textSize="12dp" />
 
-
             <EditText
                 android:id="@+id/passangers"
                 android:layout_width="150dp"
@@ -136,6 +135,9 @@
                 android:drawableStart="@drawable/ic_people_custom"
                 android:textColor="@color/primary"
                 android:drawablePadding="15dp"
+                android:inputType="none"
+                android:textIsSelectable="false"
+                android:focusable="false"
                 android:hint="Passangers"
                 android:paddingStart="10dp"
                 android:paddingEnd="12dp"

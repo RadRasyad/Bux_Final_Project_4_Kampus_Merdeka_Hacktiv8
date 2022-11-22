@@ -4,18 +4,25 @@ import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.snackbar.Snackbar;
 import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.FragmentHomeBinding;
@@ -23,7 +30,7 @@ import com.hacktiv8.bux.model.City;
 import com.hacktiv8.bux.ui.bus.BusScheduleActivity;
 import com.hacktiv8.bux.ui.chooser.DatePickerActivity;
 import com.hacktiv8.bux.ui.chooser.DestinationChooserActivity;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+//import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,16 +40,18 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private SimpleDateFormat format;
     private Calendar calendar;
-    private SlidingUpPanelLayout slidingUp;
+    //private SlidingUpPanelLayout slidingUp;
     private City departureCity;
     private  City arrivalCity;
+    private int valuePassanger;
+    private int lastValuePassanger;
 
     @SuppressLint("SimpleDateFormat")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         format = new SimpleDateFormat(" dd MMM");
-        slidingUp = requireActivity().findViewById(R.id.sliding_layout);
+        //slidingUp = requireActivity().findViewById(R.id.sliding_layout);
 
     }
 
@@ -59,6 +68,8 @@ public class HomeFragment extends Fragment {
 //            View bottomSheetView = LayoutInflater.from(getContext())
 //                    .inflate(R.layout.seat_sleding_up,
 //                    .(LinearLayout)
+
+            showSheetSlider();
         });
         binding.date.setOnClickListener(v ->{
             startActivityForResult(new Intent(getContext(), DatePickerActivity.class), 1);
@@ -111,7 +122,7 @@ public class HomeFragment extends Fragment {
                     .putExtra("departure", departureCity)
                     .putExtra("arrival", arrivalCity)
                     .putExtra("date", calendar)
-                    .putExtra("passengers", binding.passangers.getText())
+                    .putExtra("passengers", binding.passangers.getText().toString().trim())
             );
         }else {
             getBoolean(txtDate, "Please select a date");
@@ -153,8 +164,41 @@ public class HomeFragment extends Fragment {
                 }
                 break;
 
-
         }
 
+    }
+
+    private void showSheetSlider() {
+
+        final Dialog dialog = new Dialog(requireActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet_slider_passanger);
+
+        TextView totalSeat = dialog.findViewById(R.id.tvNumberSlider);
+
+        Slider  slider = dialog.findViewById(R.id.sliderPassanger);
+        slider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                valuePassanger = (int) value;
+                lastValuePassanger = (int) value;
+                totalSeat.setText(String.valueOf(valuePassanger));
+            }
+        });
+
+        dialog.findViewById(R.id.btnCancelPassanger).setOnClickListener(v -> {
+            valuePassanger = 0;
+            dialog.dismiss();
+        });
+
+        dialog.findViewById(R.id.btnSelect).setOnClickListener(v -> {
+            binding.passangers.setText(String.valueOf(lastValuePassanger));
+            dialog.dismiss();
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }
