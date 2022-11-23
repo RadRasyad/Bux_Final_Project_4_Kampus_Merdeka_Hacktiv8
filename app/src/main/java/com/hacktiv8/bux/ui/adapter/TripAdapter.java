@@ -8,21 +8,25 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.hacktiv8.bux.databinding.ItemTripTicketLayoutBinding;
 import com.hacktiv8.bux.model.Trip;
+import com.hacktiv8.bux.ui.bus.BusScheduleActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> {
 
     public ItemClickListener itemClickListener;
     private Context context;
-    private ArrayList<Trip> list;
+    private List<Trip> list;
 
-    public TripAdapter(Context context, ArrayList<Trip> list){
+    public TripAdapter(Context context, List<Trip> list){
         this.context = context;
         this.list = list;
     }
+
 
     public void setFilteredList(Context context, ArrayList<Trip> filteredList){
         this.context = context;
@@ -70,8 +74,10 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
             binding.tvDepartDate.setText(trip.getDate());
             binding.tvDepartHour.setText(trip.getDepartHour());
             binding.tvDepartCity.setText(trip.getDepartCity());
+            binding.tvDepartStation.setText("Terminal"+trip.getDepartTerminal());
             binding.tvArriveHour.setText(trip.getArrivalHour());
             binding.tvArriveCity.setText(trip.getArrivalCity());
+            binding.tvArriveStation.setText("Terminal"+trip.getArrivalTerminal());
             binding.tvPrice.setText("Rp."+trip.getPrice());
 
             itemView.setOnClickListener(new View.OnClickListener() {

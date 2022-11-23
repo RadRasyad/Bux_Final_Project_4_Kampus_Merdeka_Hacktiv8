@@ -42,16 +42,9 @@ public class DestinationChooserActivity extends AppCompatActivity {
 
         // add data
         list.add(new City("1","Semarang"));
-        list.add(new City("2","Demak"));
-        list.add(new City("3","Kendal"));
-        list.add(new City("4","Purwodadi"));
-        list.add(new City("5","Kab.Semarang"));
-        list.add(new City("6","Solo"));
-        list.add(new City("7","Blora"));
-        list.add(new City("8","Boyolali"));
-        list.add(new City("9","Surakarta"));
-
-
+        list.add(new City("2","Surabaya"));
+        list.add(new City("3","Bandung"));
+        list.add(new City("4","Jakarta"));
 
         data();
 

@@ -30,7 +30,7 @@ import com.hacktiv8.bux.model.City;
 import com.hacktiv8.bux.ui.bus.BusScheduleActivity;
 import com.hacktiv8.bux.ui.chooser.DatePickerActivity;
 import com.hacktiv8.bux.ui.chooser.DestinationChooserActivity;
-//import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private SimpleDateFormat format;
     private Calendar calendar;
-    //private SlidingUpPanelLayout slidingUp;
     private City departureCity;
     private  City arrivalCity;
     private int valuePassanger;
@@ -51,8 +50,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         format = new SimpleDateFormat(" dd MMM");
-        //slidingUp = requireActivity().findViewById(R.id.sliding_layout);
-
     }
 
     @Override
@@ -64,11 +61,6 @@ public class HomeFragment extends Fragment {
 
         Intent intent = new Intent(getContext(), DestinationChooserActivity.class);
         binding.passangers.setOnClickListener(v ->{
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
-//            View bottomSheetView = LayoutInflater.from(getContext())
-//                    .inflate(R.layout.seat_sleding_up,
-//                    .(LinearLayout)
-
             showSheetSlider();
         });
         binding.date.setOnClickListener(v ->{
