@@ -17,7 +17,6 @@
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable/rating.xml" value="0.1" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_bank_transfer.xml" value="0.494949494949495" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_bus_detail.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_bus_schedule.xml" value="0.1" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_date_picker.xml" value="0.25" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_destination_chooser.xml" value="0.25" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_detail_payment.xml" value="0.25" />
@@ -35,8 +34,7 @@
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/fragment_ticket.xml" value="0.20416666666666666" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/img_view_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/item_destination_search.xml" value="0.33" />
-        <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/item_trip_ticket_layout.xml" value="0.33" />
-        <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/layout_rating.xml" value="0.2" />
+        <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/layout_rating.xml" value="0.33" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/layout_seat.xml" value="0.22" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/order.xml" value="0.22" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />

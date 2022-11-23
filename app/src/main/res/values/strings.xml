@@ -13,6 +13,7 @@
     <string name="str_year">Year</string>
     <string name="str_vcc">VCC</string>
     <string name="str_credit_description">Last three digit on your card</string>
+    <string name="str_bank_steps_first">1. Select transfer\n2. In sub menu select virtual account transfer\n3. Type this number in the field </string>
     <string name="payment">Payment</string>
     <string name="total_payment">Total payment</string>
     <string name="harga">Rp332.333,00</string>
