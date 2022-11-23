@@ -84,7 +84,6 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/bni_mobile_banking"
-                    android:textColor="@color/subtitle"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -155,7 +154,6 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/cimb_mobile_banking"
-                    android:textColor="@color/subtitle"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 

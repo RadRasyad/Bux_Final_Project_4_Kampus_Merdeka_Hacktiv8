@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".ui.payment.BankTransferVerificationActivity">
+    tools:context=".ui.payment.RetailPaymentVerificationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -55,7 +55,7 @@
 
                 <include
                     android:id="@+id/layout_totalPayment"
-                    layout="@layout/layout_total_payment" />
+                    layout="@layout/layout_total_payment"/>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -79,15 +79,15 @@
                             android:padding="20dp">
 
                             <ImageView
-                                android:id="@+id/ivBankLogo"
+                                android:id="@+id/ivAlfamartLogo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="10dp"
                                 android:padding="2dp"
-                                app:srcCompat="@drawable/ic_bank_bni" />
+                                app:srcCompat="@drawable/ic_alfamart" />
 
                             <TextView
-                                android:id="@+id/tvBankName"
+                                android:id="@+id/tvAlfamart"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
@@ -95,7 +95,7 @@
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 tools:ignore="NestedWeights"
-                                tools:text="BNI Mobile banking" />
+                                tools:text="ALfamart" />
                         </LinearLayout>
 
                         <View
@@ -104,13 +104,13 @@
                             android:background="@drawable/underline" />
 
                         <TextView
-                            android:id="@+id/tvStepsFirst"
+                            android:id="@+id/tvStepFirst"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:lineSpacingExtra="5dp"
                             android:padding="20dp"
-                            android:text="1. Select transfer\n2. In sub menu select virtual account transfer\n3. Type this number in the field"
+                            android:text="1. Ask the cashier for online payment\n2. When you asked what Payment, answer Bux\n3. The cashier will ask what is your booking code.\nHere is your booking code:"
                             android:textColor="@color/text"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -126,7 +126,8 @@
                             android:textColor="@color/primaryLight"
                             android:textStyle="bold"
                             tools:ignore="TextContrastCheck"
-                            tools:text="230719-0001" />
+                            tools:text="230719-0001"
+                            app:drawableEndCompat="@drawable/ic_qrcode_logo"/>
 
                         <TextView
                             android:id="@+id/tvStepsSecond"
@@ -135,36 +136,15 @@
                             android:layout_weight="1"
                             android:lineSpacingExtra="5dp"
                             android:padding="20dp"
-                            android:text="4. After you press continue, input this number to the transfer amont field"
+                            android:text="4. You're gonna be charged as much as the total payment. (as you can see in this header)\n5. Keep the receipt, in case you're having problem with payment verification"
                             android:textColor="@color/text"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tvPaymentNominal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@color/grayFA"
-                            android:gravity="center"
-                            android:padding="20dp"
-                            android:textColor="@color/icon"
-                            android:textStyle="bold"
-                            tools:text="Rp332.333,00" />
-
-                        <TextView
-                            android:id="@+id/tvStepsThird"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="20dp"
-                            android:text="5. Don't forget to keep the receipt for verification process"
-                            android:textColor="@color/text"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

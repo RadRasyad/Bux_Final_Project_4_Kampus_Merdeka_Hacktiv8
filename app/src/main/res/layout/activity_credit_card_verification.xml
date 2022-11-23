@@ -49,7 +49,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <include
@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="17dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="17dp"
                     android:layout_marginBottom="100dp"
                     android:elevation="8dp"
@@ -77,9 +77,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:text="@string/card_number"
-                            android:textColor="@color/subtitle"
-                            android:textStyle="bold"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/cardNumber_et"
@@ -102,9 +101,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:text="@string/valid_until"
-                            android:textColor="@color/subtitle"
-                            android:textStyle="bold"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -119,13 +117,13 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_input"
                                 android:hint="@string/str_month"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/text"
                                 android:importantForAutofill="no"
                                 android:inputType="number"
                                 android:padding="16dp"
-                                tools:ignore="TextContrastCheck"/>
+                                android:textColor="@color/text"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                tools:ignore="TextContrastCheck" />
 
                             <EditText
                                 android:id="@+id/year_et"
@@ -136,14 +134,14 @@
                                 android:background="@drawable/selector_input"
                                 android:drawablePadding="20dp"
                                 android:hint="@string/str_year"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/text"
                                 android:importantForAutofill="no"
                                 android:inputType="number"
                                 android:minHeight="48dp"
                                 android:padding="16dp"
-                                tools:ignore="TextContrastCheck"/>
+                                android:textColor="@color/text"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                tools:ignore="TextContrastCheck" />
                         </LinearLayout>
 
                         <TextView
@@ -152,9 +150,8 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="10dp"
                             android:text="@string/Card_holder"
-                            android:textColor="@color/subtitle"
-                            android:textStyle="bold"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/surename_et"
@@ -163,22 +160,21 @@
                             android:layout_marginBottom="20dp"
                             android:background="@drawable/selector_input"
                             android:drawablePadding="20dp"
+                            android:hint="@string/surename"
                             android:importantForAutofill="no"
                             android:inputType="number"
                             android:padding="16dp"
-                            android:hint="@string/surename"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck"/>
+                            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:text="@string/str_vcc"
-                            android:textColor="@color/subtitle"
-                            android:textStyle="bold"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -222,7 +218,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/verify_payment"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>
