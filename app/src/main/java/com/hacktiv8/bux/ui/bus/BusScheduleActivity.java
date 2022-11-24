@@ -1,7 +1,5 @@
 package com.hacktiv8.bux.ui.bus;
 
-import static android.icu.lang.UCharacter.toUpperCase;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

@@ -25,7 +25,6 @@ public class BusDetailActivity extends AppCompatActivity {
             finish();
         });
 
-
         binding.btnSeePicture.setOnClickListener(v -> {
             onImageShow("pathImg");
         });
