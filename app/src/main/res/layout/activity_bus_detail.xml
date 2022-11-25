@@ -74,11 +74,11 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/nameBus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="Sempati Star"
+                        android:text="-"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="28sp"
-                        android:text="MEDAN"
+                        android:text="-"
                         android:textColor="@color/primary"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -160,7 +160,7 @@
                         android:id="@+id/departTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="17:35"
+                        android:text="00:00"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/departCity"
                         app:layout_constraintTop_toBottomOf="@+id/departCity" />
@@ -178,7 +178,7 @@
                         android:id="@+id/departDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="23 Jul 2019"
+                        android:text="-"
                         app:layout_constraintStart_toStartOf="@+id/labelDate"
                         app:layout_constraintTop_toBottomOf="@+id/labelDate" />
 
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28sp"
                         android:layout_marginEnd="16dp"
-                        android:text="PEKANBARU"
+                        android:text="-"
                         android:textColor="@color/primary"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -200,7 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
-                        android:text="09:10"
+                        android:text="00:00"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/destinationCity"
                         app:layout_constraintTop_toBottomOf="@+id/destinationCity" />
@@ -210,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="28dp"
-                        android:text="13h 45m"
+                        android:text="-"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -228,7 +228,7 @@
                         android:id="@+id/tvBusNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="P 1208 NN"
+                        android:text="-"
                         app:layout_constraintEnd_toEndOf="@+id/labelBusNo"
                         app:layout_constraintTop_toBottomOf="@+id/labelBusNo" />
 
@@ -252,7 +252,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="24 Seat are available"
+                android:text="- Seat are available"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/labelSeat"
                 app:layout_constraintStart_toStartOf="@id/labelSeat"/>

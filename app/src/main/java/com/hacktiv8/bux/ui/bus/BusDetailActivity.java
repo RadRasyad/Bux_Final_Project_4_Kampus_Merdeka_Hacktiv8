@@ -3,17 +3,31 @@ package com.hacktiv8.bux.ui.bus;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityBusDetailBinding;
+import com.hacktiv8.bux.model.Bus;
+import com.hacktiv8.bux.model.Trip;
 
 public class BusDetailActivity extends AppCompatActivity {
 
     private ActivityBusDetailBinding binding;
+    private FirebaseFirestore db;
+    public static final String EXTRA_ID = "extra_id";
+    public static final String EXTRA_BUS_NO = "extra_bus_no";
+    private Trip trip;
+    private Bus bus;
+    private String tripId, platBus, imgUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +35,36 @@ public class BusDetailActivity extends AppCompatActivity {
         binding = ActivityBusDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        db = FirebaseFirestore.getInstance();
+
+        tripId = getIntent().getStringExtra(EXTRA_ID);
+        platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
+        if (tripId==null) {
+            Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        if (platBus==null) {
+            Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        Log.d("Extra idTrip Detail", tripId);
+        Log.d("Extra platBus Detail", platBus);
+
+        getBusData(platBus);
+        getTripData(tripId);
+
         binding.backbutton.setOnClickListener(v -> {
             finish();
         });
 
+
         binding.btnSeePicture.setOnClickListener(v -> {
-            onImageShow("pathImg");
+            if (imgUrl!=null) {
+                onImageShow(imgUrl);
+            }
         });
+
 
     }
 
@@ -41,4 +78,70 @@ public class BusDetailActivity extends AppCompatActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setView(inflatedView).show();
     }
+
+    private void getTripData(String tripId) {
+        db.collection("trip")
+                .whereEqualTo("idTrip", tripId)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            trip = document.toObject(Trip.class);
+                            populateTripData(trip);
+                        }
+                    } else {
+                        Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void getBusData(String platBus) {
+
+        Log.d("Bus Data1", platBus);
+        db.collection("bus")
+                .whereEqualTo("platno", platBus)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            bus = document.toObject(Bus.class);
+                            populateBusData(bus);
+                        }
+                    } else {
+                        Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+    private void populateTripData(Trip tripData) {
+        if (tripData!=null) {
+            binding.departDate.setText(tripData.getDate());
+            binding.departCity.setText(tripData.getDepartCity());
+            binding.departTime.setText(tripData.getDepartHour());
+            binding.tvDate.setText(tripData.getDate());
+            binding.destinationCity.setText(tripData.getArrivalCity());
+            binding.destinationTime.setText(tripData.getArrivalHour());
+        } else {
+            Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void populateBusData(Bus busData) {
+        if (busData!=null) {
+            binding.nameBus.setText(busData.getBusName());
+            binding.tvBusNo.setText(busData.getBusName());
+            binding.tvSeat.setText(busData.getAvailableSeats()+" Seat are available");
+
+            imgUrl = busData.getImgUrl();
+            Glide.with(this)
+                    .load(busData.getImgUrl())
+                    .centerCrop()
+                    .into(binding.ivBus);
+        } else {
+            Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
 }

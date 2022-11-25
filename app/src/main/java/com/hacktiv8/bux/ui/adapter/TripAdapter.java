@@ -1,6 +1,7 @@
 package com.hacktiv8.bux.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.hacktiv8.bux.databinding.ActivityBusDetailBinding;
 import com.hacktiv8.bux.databinding.ItemTripTicketLayoutBinding;
 import com.hacktiv8.bux.model.Trip;
+import com.hacktiv8.bux.ui.bus.BusDetailActivity;
 import com.hacktiv8.bux.ui.bus.BusScheduleActivity;
 
 import java.util.ArrayList;
@@ -18,7 +21,6 @@ import java.util.List;
 
 public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> {
 
-    public ItemClickListener itemClickListener;
     private Context context;
     private List<Trip> list;
 
@@ -26,7 +28,6 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
         this.context = context;
         this.list = list;
     }
-
 
     public void setFilteredList(Context context, ArrayList<Trip> filteredList){
         this.context = context;
@@ -54,9 +55,6 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
         return list.size();
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener){
-        this.itemClickListener = itemClickListener;
-    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -80,19 +78,16 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
             binding.tvArriveStation.setText("Terminal"+trip.getArrivalTerminal());
             binding.tvPrice.setText("Rp."+trip.getPrice());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    itemClickListener.onClick(list.get(getAdapterPosition()));
-                }
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, BusDetailActivity.class);
+                intent.putExtra(BusDetailActivity.EXTRA_ID, trip.getIdTrip());
+                intent.putExtra(BusDetailActivity.EXTRA_BUS_NO, trip.getPlatBus());
+                itemView.getContext().startActivity(intent);
             });
-
 
         }
 
     }
 
-    public interface ItemClickListener{
-        void onClick(Trip Trip);
-    }
+
 }

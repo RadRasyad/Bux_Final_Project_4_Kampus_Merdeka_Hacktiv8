@@ -13,6 +13,15 @@ public class Trip {
     String arrivalCity;
     String arrivalTerminal;
     String arrivalHour;
+    int seatAvailable;
+
+    public int getSeatAvailable() {
+        return seatAvailable;
+    }
+
+    public void setSeatAvailable(int seatAvailable) {
+        this.seatAvailable = seatAvailable;
+    }
 
     public String getIdTrip() {
         return idTrip;
