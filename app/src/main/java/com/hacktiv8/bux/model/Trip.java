@@ -13,6 +13,7 @@ public class Trip {
     String arrivalCity;
     String arrivalTerminal;
     String arrivalHour;
+    String etaJam;
     String rating;
     int seatAvailable;
 
@@ -100,13 +101,6 @@ public class Trip {
         return arrivalTerminal;
     }
 
-    public String getRating() {
-        return rating;
-    }
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
     public void setArrivalTerminal(String arrivalTerminal) {
         this.arrivalTerminal = arrivalTerminal;
     }
@@ -118,4 +112,21 @@ public class Trip {
     public void setArrivalHour(String arrivalHour) {
         this.arrivalHour = arrivalHour;
     }
+
+    public String getEtaJam() {
+        return etaJam;
+    }
+
+    public void setEtaJam(String etaJam) {
+        this.etaJam = etaJam;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
 }

@@ -38,4 +38,5 @@ public class Bus {
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
     }
+
 }

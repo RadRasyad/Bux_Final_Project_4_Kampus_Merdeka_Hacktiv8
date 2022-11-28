@@ -2,9 +2,11 @@ package com.hacktiv8.bux.ui.bus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -48,9 +50,6 @@ public class BusDetailActivity extends AppCompatActivity {
             finish();
         }
 
-        Log.d("Extra idTrip Detail", tripId);
-        Log.d("Extra platBus Detail", platBus);
-
         getBusData(platBus);
         getTripData(tripId);
 
@@ -65,6 +64,12 @@ public class BusDetailActivity extends AppCompatActivity {
             }
         });
 
+        binding.btnBookNow.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SeatChooserActivity.class);
+            intent.putExtra(SeatChooserActivity.EXTRA_TRIP_ID, trip.getIdTrip());
+            intent.putExtra(SeatChooserActivity.EXTRA_BUS_NO, trip.getPlatBus());
+            startActivity(intent);
+        });
 
     }
 
@@ -104,6 +109,7 @@ public class BusDetailActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             bus = document.toObject(Bus.class);
                             populateBusData(bus);
+                            Log.d("Bus Data", bus.getBusName());
                         }
                     } else {
                         Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
@@ -129,7 +135,7 @@ public class BusDetailActivity extends AppCompatActivity {
     private void populateBusData(Bus busData) {
         if (busData!=null) {
             binding.nameBus.setText(busData.getBusName());
-            binding.tvBusNo.setText(busData.getBusName());
+            binding.tvBusNo.setText(busData.getPlatno());
             binding.tvSeat.setText(busData.getAvailableSeats()+" Seat are available");
 
             imgUrl = busData.getImgUrl();

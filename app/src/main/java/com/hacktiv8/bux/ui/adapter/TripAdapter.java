@@ -15,6 +15,7 @@ import com.hacktiv8.bux.databinding.ItemTripTicketLayoutBinding;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.ui.bus.BusDetailActivity;
 import com.hacktiv8.bux.ui.bus.BusScheduleActivity;
+import com.hacktiv8.bux.ui.bus.SeatChooserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,13 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
                 Intent intent = new Intent(context, BusDetailActivity.class);
                 intent.putExtra(BusDetailActivity.EXTRA_ID, trip.getIdTrip());
                 intent.putExtra(BusDetailActivity.EXTRA_BUS_NO, trip.getPlatBus());
+                itemView.getContext().startActivity(intent);
+            });
+
+            binding.btnBookNow.setOnClickListener(v -> {
+                Intent intent = new Intent(context, SeatChooserActivity.class);
+                intent.putExtra(SeatChooserActivity.EXTRA_TRIP_ID, trip.getIdTrip());
+                intent.putExtra(SeatChooserActivity.EXTRA_BUS_NO, trip.getPlatBus());
                 itemView.getContext().startActivity(intent);
             });
 
