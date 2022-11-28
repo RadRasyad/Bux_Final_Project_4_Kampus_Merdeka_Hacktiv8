@@ -99,8 +99,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-        Log.d("webclientId", getString(R.string.default_web_client_id));
+
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
     }
 
