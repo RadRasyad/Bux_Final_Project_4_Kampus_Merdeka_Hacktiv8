@@ -72,10 +72,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
             binding.tvDepartDate.setText(trip.getDate());
             binding.tvDepartHour.setText(trip.getDepartHour());
             binding.tvDepartCity.setText(trip.getDepartCity());
-            binding.tvDepartStation.setText("Terminal"+trip.getDepartTerminal());
+            binding.tvDepartStation.setText("Terminal "+trip.getDepartTerminal());
             binding.tvArriveHour.setText(trip.getArrivalHour());
+            binding.tvRating.setText(trip.getRating() + "/5");
             binding.tvArriveCity.setText(trip.getArrivalCity());
-            binding.tvArriveStation.setText("Terminal"+trip.getArrivalTerminal());
+            binding.tvArriveStation.setText("Terminal "+trip.getArrivalTerminal());
             binding.tvPrice.setText("Rp."+trip.getPrice());
 
             itemView.setOnClickListener(v -> {

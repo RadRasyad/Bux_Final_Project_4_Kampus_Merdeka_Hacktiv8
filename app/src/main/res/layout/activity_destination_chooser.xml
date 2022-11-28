@@ -10,7 +10,7 @@
 
     <EditText
         android:id="@+id/edSearch"
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
@@ -29,7 +29,7 @@
         android:id="@+id/tvCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/edSearch"
+        android:layout_alignParentRight="true"
         android:padding="10dp"
         android:text="Cancel"
         android:textColor="@color/label"

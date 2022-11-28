@@ -13,6 +13,7 @@ public class Trip {
     String arrivalCity;
     String arrivalTerminal;
     String arrivalHour;
+    String rating;
     int seatAvailable;
 
     public int getSeatAvailable() {
@@ -97,6 +98,13 @@ public class Trip {
 
     public String getArrivalTerminal() {
         return arrivalTerminal;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public void setArrivalTerminal(String arrivalTerminal) {
