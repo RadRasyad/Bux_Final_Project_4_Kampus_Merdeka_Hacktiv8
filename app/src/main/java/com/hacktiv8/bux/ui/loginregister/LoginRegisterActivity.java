@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityLoginRegisterBinding;
 import com.hacktiv8.bux.ui.MainActivity;
@@ -33,7 +34,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
     private ActivityLoginRegisterBinding binding;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private GoogleSignInClient googleSignInClient;
+    private boolean isExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         binding.googleSingIn.setIconTint(null);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         createRequest();
 
@@ -68,7 +72,14 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 progressBar(false);
-                                updateUi();
+                                boolean userExist = checkUser(task.getResult().getUser().getEmail());
+                                if (userExist) {
+                                    Intent intent = new Intent(LoginRegisterActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    updateUi();
+                                }
+
                             } else {
                                 progressBar(false);
                                 Toast.makeText(LoginRegisterActivity.this, "Authentication Failed : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -116,5 +127,18 @@ public class LoginRegisterActivity extends AppCompatActivity {
         } else {
             binding.progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private boolean checkUser(String email) {
+
+        db.collection("user")
+                .whereEqualTo("email", email)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        isExist = task.getResult().size() >= 1;
+                    }
+                });
+
+        return isExist;
     }
 }
