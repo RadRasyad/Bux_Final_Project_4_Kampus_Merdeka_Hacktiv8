@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,7 +58,6 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         Intent intent = new Intent(getContext(), DestinationChooserActivity.class);
         binding.passangers.setOnClickListener(v ->{
@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
             onStateData(savedInstanceState);
         }
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override
@@ -94,42 +94,34 @@ public class HomeFragment extends Fragment {
     }
 
     private void onStateData(Bundle savedInstanceState) {
+        departureCity = savedInstanceState.getParcelable("departure");
+        arrivalCity = savedInstanceState.getParcelable("arrival");
         calendar = (Calendar) savedInstanceState.getSerializable("date");
-        if(calendar!=null) binding.date.setText(format.format(calendar.getTime()));
-    }
+        String passengers = savedInstanceState.getString("passengers");
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        if(calendar!=null) binding.date.setText(format.format(calendar.getTime()));
+        if(departureCity!=null) binding.departure.setText(departureCity.getCity());
+        if(arrivalCity!=null) binding.arrival.setText(arrivalCity.getCity());
+
+        binding.passangers.setText(passengers);
     }
 
     private void onSearchActivity() {
-        boolean txtDeparture = binding.departure.getText().equals(getString(R.string.str_try_departure));
-        boolean txtArrival = binding.arrival.getText().equals(getString(R.string.str_try_arrival));
-        boolean txtDate = binding.date.getText().equals(getString(R.string.str_select_date));
-
-        if(!txtDeparture && !txtArrival && !txtDate) {
+        if(binding.departure.getText().toString().length() == 0 || binding.arrival.getText().toString().length() == 0 || binding.date.getText().toString().length() == 0) {
+            Toast.makeText(getActivity(), "complete the data please", Toast.LENGTH_SHORT).show();
+        }else if(binding.departure.getText().toString().equals(binding.arrival.getText().toString())){
+            Toast.makeText(getActivity(), "departure and arrival cannot same please", Toast.LENGTH_SHORT).show();
+        }else {
             startActivity(new Intent(getContext(), BusScheduleActivity.class)
                     .putExtra("departure", departureCity)
                     .putExtra("arrival", arrivalCity)
                     .putExtra("date", calendar)
                     .putExtra("passengers", binding.passangers.getText().toString().trim())
             );
-        }else {
-            getBoolean(txtDate, "Please select a date");
-            getBoolean(txtDeparture, "Please select the departure city");
-            getBoolean(txtArrival, "Please select the arrival city");
-            getBoolean(txtDeparture && txtArrival && txtDate,
-                    "please fill in the data completely");
         }
+
     }
 
-    private void getBoolean(boolean txtDeparture, String message) {
-        if (txtDeparture) {
-            Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_SHORT).show();
-        }
-    }
 
     @SuppressLint("SimpleDateFormat")
     @Override
@@ -192,5 +184,11 @@ public class HomeFragment extends Fragment {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

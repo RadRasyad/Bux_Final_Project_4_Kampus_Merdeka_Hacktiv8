@@ -5,8 +5,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="ticket">Ticket</string>
     <string name="profile">Profile</string>
-    <string name="str_try_departure">Try \"Semarang\"</string>
-    <string name="str_try_arrival">Try \"Jepara\"</string>
+    <string name="str_try_departure">Semarang</string>
+    <string name="str_try_arrival">Bandung</string>
     <string name="str_select_date">Select date</string>
     <string name="str_hide_number">**** **** **** ****</string>
     <string name="str_month">Month</string>
