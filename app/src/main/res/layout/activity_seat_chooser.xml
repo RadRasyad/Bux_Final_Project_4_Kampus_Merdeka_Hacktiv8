@@ -656,7 +656,7 @@
                                 android:layout_height="36dp"
                                 android:layout_marginEnd="4dp"
                                 android:background="@drawable/seat_selector"
-                                android:checked="false" />
+                                android:clickable="true"/>
 
                             <CheckedTextView
                                 android:id="@+id/ivSeatD8"
@@ -664,7 +664,7 @@
                                 android:layout_height="36dp"
                                 android:layout_marginStart="4dp"
                                 android:background="@drawable/seat_selector"
-                                android:checked="false" />
+                                android:clickable="true" />
 
                         </LinearLayout>
 

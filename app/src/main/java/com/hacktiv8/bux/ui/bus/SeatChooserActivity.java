@@ -3,6 +3,7 @@ package com.hacktiv8.bux.ui.bus;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CheckedTextView;
 import android.widget.Toast;
 
@@ -107,17 +108,30 @@ public class SeatChooserActivity extends AppCompatActivity {
                             seatsList.add(seat);
                         }
                         for (int i=0; i<seatsList.size(); i++) {
-                            populateSeatsData(checkedTextViewList.get(i), seatsList.get(i).isBooked());
+                            populateSeatsData(checkedTextViewList.get(i), seatsList.get(i));
                         }
                     }
                 });
     }
 
-    private void populateSeatsData(CheckedTextView seatView, boolean state) {
-            seatView.setChecked(state);
-            if (state==true) {
-                seatView.setEnabled(false);
+    private void populateSeatsData(CheckedTextView seatView, Seats seats) {
+
+        seatView.setChecked(seats.getIsBooked());
+        if (seats.getIsBooked()==true) {
+            seatView.setEnabled(false);
+        } else {
+            seatView.hasOnClickListeners();
+            seatView.setEnabled(true);
+        }
+
+        seatView.setOnClickListener(v -> {
+            if (seats.getIsBooked()==true) {
+                seatView.setChecked(false);
+            } else {
+                seatView.setChecked(true);
             }
+        });
+
     }
 
     private void seatChooserListener() {

@@ -1,9 +1,18 @@
 package com.hacktiv8.bux.model;
 
+
 public class Seats {
 
-    String seatNo;
+    public boolean getIsBooked() {
+        return isBooked;
+    }
+
+    public void setIsBooked(boolean booked) {
+        isBooked = booked;
+    }
+
     boolean isBooked;
+    String seatNo;
 
     public String getSeatNo() {
         return seatNo;
@@ -13,11 +22,4 @@ public class Seats {
         this.seatNo = seatNo;
     }
 
-    public boolean isBooked() {
-        return isBooked;
-    }
-
-    public void setBooked(boolean booked) {
-        isBooked = booked;
-    }
 }
