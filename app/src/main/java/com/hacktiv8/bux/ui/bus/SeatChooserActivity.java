@@ -2,6 +2,7 @@ package com.hacktiv8.bux.ui.bus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CheckedTextView;
@@ -15,6 +16,7 @@ import com.hacktiv8.bux.model.Trip;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SeatChooserActivity extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class SeatChooserActivity extends AppCompatActivity {
     private List<CheckedTextView> checkedTextViewList = new ArrayList<>();
     private String tripId;
     private String platBus;
+    private String bookedSeat;
+    private boolean alreadyBook = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,14 @@ public class SeatChooserActivity extends AppCompatActivity {
         }
 
         getSeatsData(platBus);
+
+        binding.btnBookNow.setOnClickListener(v -> {
+            if (alreadyBook) {
+                //TODO intent data EXTRA_TRIP_ID, EXTRA_BUS_NO, bookedSeat
+            } else {
+                Toast.makeText(this, "Book a seat first", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -115,26 +127,52 @@ public class SeatChooserActivity extends AppCompatActivity {
     }
 
     private void populateSeatsData(CheckedTextView seatView, Seats seats) {
-
+        alreadyBook = false;
+        bookedSeat = "";
         seatView.setChecked(seats.getIsBooked());
         if (seats.getIsBooked()==true) {
             seatView.setEnabled(false);
         } else {
-            seatView.hasOnClickListeners();
             seatView.setEnabled(true);
         }
 
         seatView.setOnClickListener(v -> {
-            if (seats.getIsBooked()==true) {
-                seatView.setChecked(false);
+            Log.d("alreadyBook", String.valueOf(alreadyBook));
+            Log.d("booked", bookedSeat);
+            Log.d("booked", seats.getSeatNo());
+            if (!Objects.equals(bookedSeat, seats.getSeatNo())) {
+                if (alreadyBook == false) {
+                    if (seatView.isChecked()) {
+                        seatView.setChecked(false);
+                        seats.setIsBooked(false);
+                        alreadyBook = false;
+                        bookedSeat = "";
+                    } else {
+                        seatView.setChecked(true);
+                        seats.setIsBooked(true);
+                        alreadyBook = true;
+                        bookedSeat = seats.getSeatNo();
+                        Log.d("booked seat", seats.getSeatNo());
+                    }
+                } else {
+                    Toast.makeText(this, "can only order 1 only", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                seatView.setChecked(true);
+                if (seatView.isChecked()) {
+                    seatView.setChecked(false);
+                    seats.setIsBooked(false);
+                    alreadyBook = false;
+                    bookedSeat = "";
+                } else {
+                    seatView.setChecked(true);
+                    seats.setIsBooked(true);
+                    alreadyBook = true;
+                    bookedSeat = seats.getSeatNo();
+                    Log.d("booked seat", seats.getSeatNo());
+                }
             }
+
         });
-
-    }
-
-    private void seatChooserListener() {
 
     }
 
