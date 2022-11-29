@@ -5,6 +5,7 @@ public class Bus {
     String platno;
     String busName;
     String imgUrl;
+    String rating;
     int availableSeats;
 
     public String getPlatno() {
@@ -29,6 +30,14 @@ public class Bus {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public int getAvailableSeats() {

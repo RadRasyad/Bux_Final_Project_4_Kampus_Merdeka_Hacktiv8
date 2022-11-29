@@ -137,6 +137,7 @@ public class BusDetailActivity extends AppCompatActivity {
             binding.nameBus.setText(busData.getBusName());
             binding.tvBusNo.setText(busData.getPlatno());
             binding.tvSeat.setText(busData.getAvailableSeats()+" Seat are available");
+            binding.tvRating.setText(busData.getRating()+"/10");
 
             imgUrl = busData.getImgUrl();
             Glide.with(this)

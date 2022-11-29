@@ -21,7 +21,7 @@ public class SeatChooserActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     public static final String EXTRA_TRIP_ID = "extra_trip_id";
     public static final String EXTRA_BUS_NO = "extra_bus_no";
-    private List<Seats> seatsList;
+    private List<Seats> seatsList = new ArrayList<>();
     private List<CheckedTextView> checkedTextViewList = new ArrayList<>();
     private String tripId;
     private String platBus;

@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.hacktiv8.bux.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,6 +33,17 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+
+        currentUser = mAuth.getCurrentUser();
+
+        if (currentUser!=null) {
+            binding.nameProfile.setText(currentUser.getDisplayName());
+            binding.emailProfile.setText(currentUser.getEmail());
+            Glide.with(this)
+                    .load(currentUser.getPhotoUrl())
+                    .centerCrop()
+                    .into(binding.img);
+        }
 
         binding.btnSingOut.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
