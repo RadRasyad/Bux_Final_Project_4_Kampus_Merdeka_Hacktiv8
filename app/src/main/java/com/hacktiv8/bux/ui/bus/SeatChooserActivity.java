@@ -1,5 +1,10 @@
 package com.hacktiv8.bux.ui.bus;
 
+import static com.hacktiv8.bux.ui.payment.DetailPaymentActivity.EXTRA_BOOKED_SEAT;
+import static com.hacktiv8.bux.ui.payment.DetailPaymentActivity.EXTRA_BUS_NO;
+import static com.hacktiv8.bux.ui.payment.DetailPaymentActivity.EXTRA_TRIP_ID;
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +18,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.hacktiv8.bux.databinding.ActivitySeatChooserBinding;
 import com.hacktiv8.bux.model.Seats;
 import com.hacktiv8.bux.model.Trip;
+import com.hacktiv8.bux.ui.payment.DetailPaymentActivity;
+import com.hacktiv8.bux.ui.ticket.TicketFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +63,13 @@ public class SeatChooserActivity extends AppCompatActivity {
         binding.btnBookNow.setOnClickListener(v -> {
             if (alreadyBook) {
                 //TODO intent data EXTRA_TRIP_ID, EXTRA_BUS_NO, bookedSeat
+                startActivity(new Intent(this, DetailPaymentActivity.class)
+                        .putExtra(DetailPaymentActivity.EXTRA_TRIP_ID, tripId)
+                        .putExtra(DetailPaymentActivity.EXTRA_BUS_NO, platBus)
+                        .putExtra(EXTRA_BOOKED_SEAT, bookedSeat)
+                );
+
+
             } else {
                 Toast.makeText(this, "Book a seat first", Toast.LENGTH_SHORT).show();
             }

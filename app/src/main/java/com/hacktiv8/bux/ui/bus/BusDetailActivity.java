@@ -120,10 +120,10 @@ public class BusDetailActivity extends AppCompatActivity {
 
     private void populateTripData(Trip tripData) {
         if (tripData!=null) {
-            binding.departDate.setText(tripData.getDate());
+//            binding.departDate.setText(tripData.getDate());
             binding.departCity.setText(tripData.getDepartCity());
             binding.departTime.setText(tripData.getDepartHour());
-            binding.tvDate.setText(tripData.getDate());
+//            binding.tvDate.setText(tripData.getDate());
             binding.destinationCity.setText(tripData.getArrivalCity());
             binding.destinationTime.setText(tripData.getArrivalHour());
         } else {

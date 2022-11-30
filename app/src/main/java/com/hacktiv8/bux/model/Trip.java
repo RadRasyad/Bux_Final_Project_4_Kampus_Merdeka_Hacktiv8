@@ -6,7 +6,7 @@ public class Trip {
     String busName;
     String platBus;
     String price;
-    String date;
+    Long date;
     String departCity;
     String departTerminal;
     String departHour;
@@ -57,11 +57,11 @@ public class Trip {
         this.price = price;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 

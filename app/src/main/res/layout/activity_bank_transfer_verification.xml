@@ -119,14 +119,12 @@
                             android:id="@+id/tvPaymentNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:background="@color/grayFA"
                             android:gravity="center"
                             android:padding="20dp"
                             android:textColor="@color/primaryLight"
                             android:textStyle="bold"
-                            tools:ignore="TextContrastCheck"
-                            tools:text="230719-0001" />
+                            android:text="230719-0001" />
 
                         <TextView
                             android:id="@+id/tvStepsSecond"
@@ -141,7 +139,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tvPaymentNominal"
+                            android:id="@+id/totalPaymentTv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

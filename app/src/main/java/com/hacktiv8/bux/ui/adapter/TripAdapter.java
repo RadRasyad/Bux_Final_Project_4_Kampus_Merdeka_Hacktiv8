@@ -70,7 +70,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
         public void bind(Trip trip){
             binding.tvBusName.setText(trip.getBusName());
             binding.tvBusNo.setText(trip.getPlatBus());
-            binding.tvDepartDate.setText(trip.getDate());
+//            binding.tvDepartDate.setText((int) trip.getDate());
             binding.tvDepartHour.setText(trip.getDepartHour());
             binding.tvDepartCity.setText(trip.getDepartCity());
             binding.tvDepartStation.setText("Terminal "+trip.getDepartTerminal());

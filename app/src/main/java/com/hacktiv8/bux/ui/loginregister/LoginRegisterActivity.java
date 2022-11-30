@@ -60,7 +60,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 9001) {
+        if (requestCode == 100) {
             progressBar(true);
             Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
             if (signInAccountTask.isSuccessful()) {
@@ -94,8 +94,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
     }
 
     private void createRequest() {
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
+                GoogleSignInOptions.DEFAULT_SIGN_IN
+        ).requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -105,7 +106,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
     private void signIn() {
         Intent intent = googleSignInClient.getSignInIntent();
-        startActivityForResult(intent, 9001);
+        startActivityForResult(intent, 100);
     }
 
     @Override
