@@ -15,6 +15,7 @@
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable-v24/ic_star.xml" value="0.1" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable-v24/ic_star_border.xml" value="0.1" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable-v24/underline.xml" value="0.1585" />
+        <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable/custom_card.xml" value="0.1425" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable/custom_ractangle.xml" value="0.2115" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable/custom_ractangle_yel.xml" value="0.2115" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/drawable/custum_input.xml" value="0.1585" />
@@ -40,6 +41,7 @@
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_setup_phone.xml" value="0.20416666666666666" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/empty_state_ticket_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/form_qrcode.xml" value="0.18" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/android/Bux_Final_Project_4_Kampus_Merdeka_Hacktiv8/app/src/main/res/layout/fragment_ticket.xml" value="0.20416666666666666" />

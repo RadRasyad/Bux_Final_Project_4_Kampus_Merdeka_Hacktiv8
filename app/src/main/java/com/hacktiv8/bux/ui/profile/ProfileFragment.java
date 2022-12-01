@@ -12,13 +12,19 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.hacktiv8.bux.databinding.FragmentProfileBinding;
+import com.hacktiv8.bux.model.User;
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private FirebaseFirestore db;
+    private String phoneNumber, email;
+    private static User user;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,13 +43,20 @@ public class ProfileFragment extends Fragment {
         currentUser = mAuth.getCurrentUser();
 
         if (currentUser!=null) {
-            binding.nameProfile.setText(currentUser.getDisplayName());
-            binding.emailProfile.setText(currentUser.getEmail());
+//            binding.nameProfile.setText(currentUser.getDisplayName());
+//            binding.emailProfile.setText(currentUser.getPhoneNumber());
             Glide.with(this)
                     .load(currentUser.getPhotoUrl())
                     .centerCrop()
                     .into(binding.img);
         }
+
+        db = FirebaseFirestore.getInstance();
+
+        email = currentUser.getEmail();
+        getUserData(email);
+
+        binding.nameProfile.setText(phoneNumber);
 
         binding.btnSingOut.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
@@ -54,5 +67,27 @@ public class ProfileFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+
+    private void getUserData(String email) {
+        db.collection("user").whereEqualTo("email", email)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                            user = documentSnapshot.toObject(User.class);
+                            getPhoneNumber(user);
+                        }
+
+                    }
+                });
+
+    }
+
+    private void getPhoneNumber(User user){
+        phoneNumber = user.getPhoneNumber();
+        binding.emailProfile.setText(user.getPhoneNumber());
+
+
     }
 }

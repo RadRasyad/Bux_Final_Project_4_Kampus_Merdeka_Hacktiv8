@@ -122,9 +122,9 @@
                             android:background="@color/grayFA"
                             android:gravity="center"
                             android:padding="20dp"
+                            android:text="230719-0001"
                             android:textColor="@color/primaryLight"
-                            android:textStyle="bold"
-                            android:text="230719-0001" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvStepsSecond"
@@ -173,10 +173,10 @@
         android:id="@+id/btnVerifyPayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/verify_payment"
-        android:layout_alignParentBottom="true" />
+        android:text="@string/verify_payment" />
 
 </RelativeLayout>

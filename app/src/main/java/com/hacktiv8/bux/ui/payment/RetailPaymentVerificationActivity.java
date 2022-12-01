@@ -1,20 +1,24 @@
 package com.hacktiv8.bux.ui.payment;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.encoder.QRCode;
+
 import com.hacktiv8.bux.R;
-import com.hacktiv8.bux.databinding.ActivityBankTransferBinding;
-import com.hacktiv8.bux.databinding.ActivityCreditCardVerificationBinding;
 import com.hacktiv8.bux.databinding.ActivityRetailPaymentVerificationBinding;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -30,6 +34,7 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
     public static final String EXTRA_TO_TGL = "extra_to_tgl";
     private Locale localeID = new Locale("in", "ID");
     private NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+    private MultiFormatWriter multi = new MultiFormatWriter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,42 +49,46 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
         double dTotal = Double.valueOf(total);
         binding.totalPaymentTv.setText(formatRupiah.format((double)dTotal));
 
-//        binding.tvPaymentNumber.setOnClickListener(v ->{
-//            try {
-//                TextToQRImageEncode(this,  "Alfamaret", 230719-0001);
-//            } catch (WriterException e) {
-//                e.printStackTrace();
-//            }
-//        });
+        binding.tvPaymentNumber.setOnClickListener(v ->{
+            puQrCode();
+        });
 
 
     }
 
-    public static Bitmap TextToQRImageEncode(Context context, String Value, int QRCodeWidth) throws WriterException {
-        BitMatrix bitMatrix;
+    void puQrCode(){
+        AlertDialog.Builder popupBuilder = new AlertDialog.Builder(this);
+
+        View view = getLayoutInflater().inflate(R.layout.form_qrcode, null);
+
+
+        ImageView imgQRCode = (ImageView) view.findViewById(R.id.imgQrCode);
+        TextView back = (TextView) view.findViewById(R.id.back);
+
+        Bitmap bitmap ;
+//        String code = "230719-0001";
+        String code = binding.tvPaymentNumber.getText().toString();
         try {
-            bitMatrix = new MultiFormatWriter().encode(Value, BarcodeFormat.DATA_MATRIX.QR_CODE, QRCodeWidth, QRCodeWidth, null);
-        } catch (IllegalArgumentException Illegalargumentexception) {
-            return null;
+            BitMatrix bitMatrix = multi.encode(code, BarcodeFormat.AZTEC, 320, 320);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            imgQRCode.setImageBitmap(bitmap);
+
+        }catch (WriterException e){
+            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
         }
 
-        int bitMatrixWidth = bitMatrix.getWidth();
 
-        int bitMatrixHeight = bitMatrix.getHeight();
+        popupBuilder.setView(view);
 
-        int[] pixels = new int[bitMatrixWidth * bitMatrixHeight];
+        AlertDialog popupForm = popupBuilder.create();
+        popupForm.show();
 
-        for (int y = 0; y < bitMatrixHeight; y++) {
-            int offset = y * bitMatrixWidth;
+        back.setOnClickListener(v ->{
+            popupForm.dismiss();
+        });
 
-            for (int x = 0; x < bitMatrixWidth; x++) {
-                pixels[offset + x] = bitMatrix.get(x, y) ?
-                        context.getResources().getColor(R.color.black) : context.getResources().getColor(R.color.white);
-            }
-        }
 
-        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
-        bitmap.setPixels(pixels, 0, QRCodeWidth, 0, 0, bitMatrixWidth, bitMatrixHeight);
-        return bitmap;
     }
 }

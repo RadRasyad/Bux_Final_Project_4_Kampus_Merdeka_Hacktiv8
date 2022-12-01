@@ -50,8 +50,6 @@ public class DetailPaymentActivity extends AppCompatActivity {
         userId = "088228659668";
 
 
-
-
         if (tripId==null) {
             Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
             finish();
