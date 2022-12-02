@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
     private  City arrivalCity;
     private int valuePassanger;
     private int lastValuePassanger;
+    private long timeInMillis;
 
     @SuppressLint("SimpleDateFormat")
     @Override
@@ -116,12 +118,11 @@ public class HomeFragment extends Fragment {
                     .putExtra("departure", departureCity)
                     .putExtra("arrival", arrivalCity)
                     .putExtra("date", calendar)
+                    .putExtra("timeInMillis", timeInMillis)
                     .putExtra("passengers", binding.passangers.getText().toString().trim())
             );
         }
-
     }
-
 
     @SuppressLint("SimpleDateFormat")
     @Override
@@ -131,6 +132,8 @@ public class HomeFragment extends Fragment {
             case 1:
                 if(data != null && resultCode == RESULT_OK){
                     calendar = (Calendar) data.getSerializableExtra("date");
+                    timeInMillis = (long) data.getSerializableExtra("timeInMillis");
+                    Log.d("timeInMillis", String.valueOf(timeInMillis));
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM");
                     binding.date.setText(simpleDateFormat.format(calendar.getTime()));
                 }
@@ -147,7 +150,6 @@ public class HomeFragment extends Fragment {
                     binding.arrival.setText(arrivalCity.getCity());
                 }
                 break;
-
         }
 
     }

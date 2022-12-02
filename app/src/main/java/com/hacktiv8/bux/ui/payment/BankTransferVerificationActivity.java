@@ -3,6 +3,7 @@ package com.hacktiv8.bux.ui.payment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +20,7 @@ import com.hacktiv8.bux.databinding.ActivityBankTransferBinding;
 import com.hacktiv8.bux.databinding.ActivityBankTransferVerificationBinding;
 import com.hacktiv8.bux.model.Ticket;
 import com.hacktiv8.bux.model.User;
+import com.hacktiv8.bux.ui.MainActivity;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -92,8 +94,6 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
                             getPhoneNumber(user);
                         }
 
-
-
                     }
 
                 });
@@ -102,8 +102,6 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
 
     private void getPhoneNumber(User user){
         phoneNumber = user.getPhoneNumber();
-
-
     }
 
     private void order(String email, String idTiket, Ticket ticket){
@@ -115,7 +113,10 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
+                        Intent intent = new Intent(BankTransferVerificationActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        BankTransferVerificationActivity.this.finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

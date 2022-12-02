@@ -40,7 +40,7 @@ public class BankTransferActivity extends AppCompatActivity {
         binding.bniCv.setOnClickListener(v ->{
             startActivity(new Intent(this, BankTransferVerificationActivity.class)
                     .putExtra(BankTransferVerificationActivity.EXTRA_TRIP_ID, tripId)
-                    .putExtra(BankTransferVerificationActivity.EXTRA_TO_TGL, platBus)
+                    .putExtra(BankTransferVerificationActivity.EXTRA_BUS_NO, platBus)
                     .putExtra(BankTransferVerificationActivity.EXTRA_BOOKED_SEAT, bookedSeat)
                     .putExtra(BankTransferVerificationActivity.EXTRA_TOTAL, total)
                     .putExtra(BankTransferVerificationActivity.EXTRA_TO_TGL, toTgl)

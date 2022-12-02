@@ -53,14 +53,12 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
             puQrCode();
         });
 
-
     }
 
     void puQrCode(){
         AlertDialog.Builder popupBuilder = new AlertDialog.Builder(this);
 
         View view = getLayoutInflater().inflate(R.layout.form_qrcode, null);
-
 
         ImageView imgQRCode = (ImageView) view.findViewById(R.id.imgQrCode);
         TextView back = (TextView) view.findViewById(R.id.back);

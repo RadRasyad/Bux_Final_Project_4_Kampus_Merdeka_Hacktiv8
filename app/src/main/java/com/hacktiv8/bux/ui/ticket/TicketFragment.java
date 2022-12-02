@@ -3,6 +3,7 @@ package com.hacktiv8.bux.ui.ticket;
 import static androidx.fragment.app.FragmentManager.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +18,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hacktiv8.bux.databinding.FragmentTicketBinding;
 import com.hacktiv8.bux.model.User;
+import com.hacktiv8.bux.ui.MainActivity;
 
 public class TicketFragment extends Fragment {
 
     private FirebaseFirestore db;
     private FragmentTicketBinding binding;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,8 +34,6 @@ public class TicketFragment extends Fragment {
         String userId = "088228659668";
 //        Log.d("Extra idUser Detail", userId);
         getUserData(userId);
-
-
 
 
         return root;
@@ -58,6 +57,7 @@ public class TicketFragment extends Fragment {
                         } else {
                             Log.d(TAG, "No such document");
                         }
+
                     }else{
                         Log.d(TAG, "get failed with ", task.getException());
                     }

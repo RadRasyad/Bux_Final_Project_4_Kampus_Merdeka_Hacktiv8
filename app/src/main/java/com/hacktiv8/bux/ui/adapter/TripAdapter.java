@@ -16,6 +16,7 @@ import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.ui.bus.BusDetailActivity;
 import com.hacktiv8.bux.ui.bus.BusScheduleActivity;
 import com.hacktiv8.bux.ui.bus.SeatChooserActivity;
+import com.hacktiv8.bux.utils.DateHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,21 +57,21 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
         return list.size();
     }
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final ItemTripTicketLayoutBinding binding;
-
 
         public MyViewHolder(ItemTripTicketLayoutBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bind(Trip trip){
+        public void bind(Trip trip) {
             binding.tvBusName.setText(trip.getBusName());
             binding.tvBusNo.setText(trip.getPlatBus());
-//            binding.tvDepartDate.setText((int) trip.getDate());
+            binding.tvDepartDate.setText(
+                    DateHelper.timestampToLocalDate(trip.getDate())
+            );
             binding.tvDepartHour.setText(trip.getDepartHour());
             binding.tvDepartCity.setText(trip.getDepartCity());
             binding.tvDepartStation.setText("Terminal "+trip.getDepartTerminal());

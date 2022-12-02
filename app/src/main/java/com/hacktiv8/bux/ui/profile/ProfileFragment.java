@@ -1,6 +1,8 @@
 package com.hacktiv8.bux.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.hacktiv8.bux.databinding.FragmentProfileBinding;
 import com.hacktiv8.bux.model.User;
+import com.hacktiv8.bux.ui.MainActivity;
+import com.hacktiv8.bux.ui.loginregister.LoginRegisterActivity;
 
 public class ProfileFragment extends Fragment {
 
@@ -43,8 +47,8 @@ public class ProfileFragment extends Fragment {
         currentUser = mAuth.getCurrentUser();
 
         if (currentUser!=null) {
-//            binding.nameProfile.setText(currentUser.getDisplayName());
-//            binding.emailProfile.setText(currentUser.getPhoneNumber());
+            binding.emailProfile.setText(currentUser.getEmail());
+            binding.nameProfile.setText(String.valueOf(currentUser.getDisplayName()));
             Glide.with(this)
                     .load(currentUser.getPhotoUrl())
                     .centerCrop()
@@ -56,10 +60,9 @@ public class ProfileFragment extends Fragment {
         email = currentUser.getEmail();
         getUserData(email);
 
-        binding.nameProfile.setText(phoneNumber);
-
         binding.btnSingOut.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(requireContext(), LoginRegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
     }
 
@@ -86,8 +89,5 @@ public class ProfileFragment extends Fragment {
 
     private void getPhoneNumber(User user){
         phoneNumber = user.getPhoneNumber();
-        binding.emailProfile.setText(user.getPhoneNumber());
-
-
     }
 }

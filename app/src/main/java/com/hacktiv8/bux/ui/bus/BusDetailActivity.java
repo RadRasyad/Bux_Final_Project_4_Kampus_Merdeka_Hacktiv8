@@ -20,6 +20,7 @@ import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityBusDetailBinding;
 import com.hacktiv8.bux.model.Bus;
 import com.hacktiv8.bux.model.Trip;
+import com.hacktiv8.bux.utils.DateHelper;
 
 public class BusDetailActivity extends AppCompatActivity {
 
@@ -101,7 +102,6 @@ public class BusDetailActivity extends AppCompatActivity {
 
     private void getBusData(String platBus) {
 
-        Log.d("Bus Data1", platBus);
         db.collection("bus")
                 .whereEqualTo("platno", platBus)
                 .get().addOnCompleteListener(task -> {
@@ -109,7 +109,7 @@ public class BusDetailActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             bus = document.toObject(Bus.class);
                             populateBusData(bus);
-                            Log.d("Bus Data", bus.getBusName());
+
                         }
                     } else {
                         Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
@@ -120,10 +120,14 @@ public class BusDetailActivity extends AppCompatActivity {
 
     private void populateTripData(Trip tripData) {
         if (tripData!=null) {
-//            binding.departDate.setText(tripData.getDate());
+            binding.departDate.setText(
+                    DateHelper.timestampToLocalDate(trip.getDate())
+            );
             binding.departCity.setText(tripData.getDepartCity());
             binding.departTime.setText(tripData.getDepartHour());
-//            binding.tvDate.setText(tripData.getDate());
+            binding.tvDate.setText(
+                    DateHelper.timestampToLocalDate2(trip.getDate())
+            );
             binding.destinationCity.setText(tripData.getArrivalCity());
             binding.destinationTime.setText(tripData.getArrivalHour());
         } else {

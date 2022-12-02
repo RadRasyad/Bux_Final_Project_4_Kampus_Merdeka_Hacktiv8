@@ -1,19 +1,17 @@
 package com.hacktiv8.bux.ui.bus;
 
-import static android.icu.lang.UCharacter.toUpperCase;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityBusScheduleBinding;
-import com.hacktiv8.bux.databinding.ActivityDestinationChooserBinding;
 import com.hacktiv8.bux.model.City;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.ui.adapter.TripAdapter;
@@ -35,6 +33,7 @@ public class BusScheduleActivity extends AppCompatActivity {
     private SimpleDateFormat format, date;
     private TripAdapter tripAdapter;
     private RecyclerView rvTrip;
+    private long timeInMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,9 @@ public class BusScheduleActivity extends AppCompatActivity {
         calendar =  (Calendar)getIntent().getSerializableExtra("date");
         format = new SimpleDateFormat("EEE, d MMM yyyy");
         date = new SimpleDateFormat("d MMM yyyy");
+        timeInMillis = getIntent().getLongExtra("timeInMillis", 0);
 
+        Log.d("timeInMillis Bus", String.valueOf(timeInMillis));
         String displayPassengers = "Seat " +passengers;
 
         binding.seats.setText(displayPassengers);
@@ -67,51 +68,50 @@ public class BusScheduleActivity extends AppCompatActivity {
         rvTrip.setLayoutManager(new LinearLayoutManager(this));
         getData(from, to);
 
-
     }
 
-//    private void getTripData(String departure, String arrival, String date, String availableSeat) {
-//
-//        //TODO availableSeat ?
-//        db.collection("trip")
-//                .whereEqualTo("departCity", departure)
-//                .whereEqualTo("arrivalCity", arrival)
-//                .whereEqualTo("date", date)
-//                .get().addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        tripList.clear();
-//                        // input data ke adapter
-//                    } else {
-//                        Log.w("AdminProduk", "loadPost:onCancelled", task.getException());
-//                        //show empty state
-//                    }
-//                });
-//    }
-
     private void getData(String departure, String arrival) {
-        //TODO availableSeat ?
+        //Karena keterbatasan query jadi filter total seat yg tersedia tidak bisa diquery
+        // hanya bisa 1 .wheregreaterThanOrEqualTo
+        progressBar(true);
         db.collection("trip")
                 .whereEqualTo("departCity", departure)
                 .whereEqualTo("arrivalCity", arrival)
+                .whereGreaterThanOrEqualTo("date", timeInMillis)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         tripList.clear();
-                        // input data ke adapter
+                        emptyState(false);
                         for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
                             Trip trip = documentSnapshot.toObject(Trip.class);
                             tripList.add(trip);
                         }
-                        Log.d("AdminProduk", String.valueOf(tripList.size()));
+                        progressBar(false);
                         tripAdapter = new TripAdapter(BusScheduleActivity.this, tripList);
                         tripAdapter.notifyDataSetChanged();
                         rvTrip.setAdapter(tripAdapter);
 
                     } else {
                         Log.w("AdminProduk", "loadPost:onCancelled", task.getException());
-                        //show empty state
+                        emptyState(true);
                     }
                 });
     }
 
+    private void progressBar(boolean state) {
+        if (state) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void emptyState(boolean state) {
+        if (state) {
+            binding.emptyState.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            binding.emptyState.getRoot().setVisibility(View.GONE);
+        }
+    }
 
 }

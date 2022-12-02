@@ -41,7 +41,7 @@ public class PaymentMethod extends AppCompatActivity {
         binding.creditCv.setOnClickListener(v -> {
             startActivity(new Intent(this, CreditCardVerificationActivity.class)
                     .putExtra(CreditCardVerificationActivity.EXTRA_TRIP_ID, tripId)
-                    .putExtra(CreditCardVerificationActivity.EXTRA_TO_TGL, platBus)
+                    .putExtra(CreditCardVerificationActivity.EXTRA_BUS_NO, platBus)
                     .putExtra(CreditCardVerificationActivity.EXTRA_BOOKED_SEAT, bookedSeat)
                     .putExtra(CreditCardVerificationActivity.EXTRA_TOTAL, total)
                     .putExtra(CreditCardVerificationActivity.EXTRA_TO_TGL, toTgl)
@@ -52,7 +52,7 @@ public class PaymentMethod extends AppCompatActivity {
         binding.bankCv.setOnClickListener(v -> {
             startActivity(new Intent(this, BankTransferActivity.class)
                     .putExtra(BankTransferActivity.EXTRA_TRIP_ID, tripId)
-                    .putExtra(BankTransferActivity.EXTRA_TO_TGL, platBus)
+                    .putExtra(BankTransferActivity.EXTRA_BUS_NO, platBus)
                     .putExtra(BankTransferActivity.EXTRA_BOOKED_SEAT, bookedSeat)
                     .putExtra(BankTransferActivity.EXTRA_TOTAL, total)
                     .putExtra(BankTransferActivity.EXTRA_TO_TGL, toTgl)
@@ -62,7 +62,7 @@ public class PaymentMethod extends AppCompatActivity {
         binding.retailCv.setOnClickListener(v -> {
             startActivity(new Intent(this, RetailPaymentVerificationActivity.class)
                     .putExtra(RetailPaymentVerificationActivity.EXTRA_TRIP_ID, tripId)
-                    .putExtra(RetailPaymentVerificationActivity.EXTRA_TO_TGL, platBus)
+                    .putExtra(RetailPaymentVerificationActivity.EXTRA_BUS_NO, platBus)
                     .putExtra(RetailPaymentVerificationActivity.EXTRA_BOOKED_SEAT, bookedSeat)
                     .putExtra(RetailPaymentVerificationActivity.EXTRA_TOTAL, total)
                     .putExtra(RetailPaymentVerificationActivity.EXTRA_TO_TGL, toTgl)
