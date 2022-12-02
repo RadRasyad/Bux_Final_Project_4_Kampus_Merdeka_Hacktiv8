@@ -1,9 +1,11 @@
 package com.hacktiv8.bux.ui.payment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -18,15 +27,23 @@ import com.google.zxing.common.BitMatrix;
 
 import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityRetailPaymentVerificationBinding;
+import com.hacktiv8.bux.model.Ticket;
+import com.hacktiv8.bux.model.User;
+import com.hacktiv8.bux.ui.MainActivity;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.UUID;
 
 public class RetailPaymentVerificationActivity extends AppCompatActivity {
 
     private ActivityRetailPaymentVerificationBinding binding;
-    private String total, tripId, platBus, bookedSeat, toTgl;
+    private String total, tripId, platBus, bookedSeat, toTgl, email, idTiket, phoneNumber;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private User user;
     public static final String EXTRA_TRIP_ID = "extra_tripid";
     public static final String EXTRA_BUS_NO = "extra_busno";
     public static final String EXTRA_BOOKED_SEAT = "extra_booked_seat";
@@ -40,6 +57,12 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRetailPaymentVerificationBinding.inflate(getLayoutInflater());
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        email = currentUser.getEmail();
+        getUserData(email);
+
         setContentView(binding.getRoot());
         tripId = getIntent().getStringExtra(EXTRA_TRIP_ID);
         platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
@@ -53,6 +76,24 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
             puQrCode();
         });
 
+        binding.btnVerifyPayment.setOnClickListener(v ->{
+            idTiket = UUID.randomUUID().toString();
+            String tranfer = "Alfamart";
+            String status = "Paid";
+
+            Ticket addOrder = new Ticket();
+            addOrder.setIdTicket(idTiket);
+            addOrder.setIdTrip(tripId);
+            addOrder.setPlatno(platBus);
+            addOrder.setSeatNo(bookedSeat);
+            addOrder.setTotal(total);
+            addOrder.setToTgl(toTgl);
+            addOrder.setTransaksi(tranfer);
+            addOrder.setStatus(status);
+
+            order(phoneNumber, idTiket, addOrder);
+        });
+
     }
 
     void puQrCode(){
@@ -64,7 +105,6 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
         TextView back = (TextView) view.findViewById(R.id.back);
 
         Bitmap bitmap ;
-//        String code = "230719-0001";
         String code = binding.tvPaymentNumber.getText().toString();
         try {
             BitMatrix bitMatrix = multi.encode(code, BarcodeFormat.AZTEC, 320, 320);
@@ -87,6 +127,52 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
             popupForm.dismiss();
         });
 
+
+    }
+
+    private void getUserData(String userId) {
+        db.collection("user").whereEqualTo("email", userId)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                            user = documentSnapshot.toObject(User.class);
+                            getPhoneNumber(user);
+                        }
+
+
+
+                    }
+
+                });
+
+    }
+
+    private void getPhoneNumber(User user){
+        phoneNumber = user.getPhoneNumber();
+    }
+
+    private void order(String email, String idTiket, Ticket ticket){
+        db.collection("user")
+                .document(email)
+                .collection("order")
+                .document(idTiket)
+                .set(ticket)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Intent intent = new Intent(RetailPaymentVerificationActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        RetailPaymentVerificationActivity.this.finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
 
     }
 }

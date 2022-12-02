@@ -165,7 +165,7 @@
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 tools:ignore="NestedWeights"
-                                tools:text="ALfamart" />
+                                tools:text="Alfamart" />
                         </LinearLayout>
 
                         <View

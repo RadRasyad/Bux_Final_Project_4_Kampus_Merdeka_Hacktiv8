@@ -45,16 +45,14 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityBankTransferVerificationBinding.inflate(getLayoutInflater());
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
         currentUser = mAuth.getCurrentUser();
-
         email = currentUser.getEmail();
         getUserData(email);
 
-        binding = ActivityBankTransferVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         tripId = getIntent().getStringExtra(EXTRA_TRIP_ID);
         platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
@@ -94,6 +92,8 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
                             getPhoneNumber(user);
                         }
 
+
+
                     }
 
                 });
@@ -113,6 +113,7 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+
                         Intent intent = new Intent(BankTransferVerificationActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
