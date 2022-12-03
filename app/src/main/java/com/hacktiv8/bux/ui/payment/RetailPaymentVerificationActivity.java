@@ -57,13 +57,14 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRetailPaymentVerificationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         email = currentUser.getEmail();
         getUserData(email);
 
-        setContentView(binding.getRoot());
         tripId = getIntent().getStringExtra(EXTRA_TRIP_ID);
         platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
         bookedSeat = getIntent().getStringExtra(EXTRA_BOOKED_SEAT);

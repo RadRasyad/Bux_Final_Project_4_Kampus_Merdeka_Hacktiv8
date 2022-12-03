@@ -68,7 +68,7 @@ public class DetailPaymentActivity extends AppCompatActivity {
         getUserData(userId);
         getTrip(tripId);
 
-//        binding.titleName.setText(total);
+        binding.titleName.setText(platBus);
 
 
         binding.btnPayment.setOnClickListener(v ->{

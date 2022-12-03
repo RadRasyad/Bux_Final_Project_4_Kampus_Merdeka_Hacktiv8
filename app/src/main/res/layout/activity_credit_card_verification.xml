@@ -258,7 +258,7 @@
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/selector_input"
-                                android:hint="@string/surename"
+                                android:hint="@string/str_vcc"
                                 android:importantForAutofill="no"
                                 android:inputType="number"
                                 android:padding="16dp"
