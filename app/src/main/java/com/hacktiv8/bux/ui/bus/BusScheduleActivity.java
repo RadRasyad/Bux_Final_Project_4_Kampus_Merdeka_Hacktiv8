@@ -15,6 +15,7 @@ import com.hacktiv8.bux.databinding.ActivityBusScheduleBinding;
 import com.hacktiv8.bux.model.City;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.ui.adapter.TripAdapter;
+import com.hacktiv8.bux.utils.DateHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,13 +54,12 @@ public class BusScheduleActivity extends AppCompatActivity {
         date = new SimpleDateFormat("d MMM yyyy");
         timeInMillis = getIntent().getLongExtra("timeInMillis", 0);
 
-        Log.d("timeInMillis Bus", String.valueOf(timeInMillis));
         String displayPassengers = "Seat " +passengers;
 
         binding.seats.setText(displayPassengers);
         binding.departure.setText(departure.getCity());
         binding.arrival.setText(arrival.getCity());
-        binding.date.setText(date.format(calendar.getTime()));
+        binding.date.setText(DateHelper.timestampToLocalDate3(timeInMillis));
 
         String from = binding.departure.getText().toString();
         String to = binding.arrival.getText().toString();

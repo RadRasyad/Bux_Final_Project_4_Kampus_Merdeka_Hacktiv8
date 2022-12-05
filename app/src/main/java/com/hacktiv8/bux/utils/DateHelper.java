@@ -41,4 +41,14 @@ public class DateHelper {
         return sdf.format(d);
     }
 
+    public static String timestampToBookNo(long ts) {
+
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(ts);
+        java.util.Date d = c.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
+
+        return sdf.format(d);
+    }
+
 }
