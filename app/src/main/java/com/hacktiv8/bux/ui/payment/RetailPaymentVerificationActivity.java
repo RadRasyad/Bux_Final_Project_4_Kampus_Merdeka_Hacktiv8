@@ -81,6 +81,7 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
             idTiket = UUID.randomUUID().toString();
             String tranfer = "Alfamart";
             String status = "Paid";
+            Boolean rate = false;
 
             Ticket addOrder = new Ticket();
             addOrder.setIdTicket(idTiket);
@@ -91,6 +92,8 @@ public class RetailPaymentVerificationActivity extends AppCompatActivity {
             addOrder.setToTgl(toTgl);
             addOrder.setTransaksi(tranfer);
             addOrder.setStatus(status);
+            addOrder.setRated(rate);
+
 
             order(phoneNumber, idTiket, addOrder);
         });

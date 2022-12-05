@@ -66,6 +66,7 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
             idTiket = UUID.randomUUID().toString();
             String tranfer = "Bank BNI";
             String status = "Paid";
+            Boolean rate = false;
 
             Ticket addOrder = new Ticket();
             addOrder.setIdTicket(idTiket);
@@ -76,6 +77,7 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
             addOrder.setToTgl(toTgl);
             addOrder.setTransaksi(tranfer);
             addOrder.setStatus(status);
+            addOrder.setRated(rate);
 
             order(phoneNumber, idTiket, addOrder);
 

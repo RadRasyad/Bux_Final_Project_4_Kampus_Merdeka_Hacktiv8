@@ -3,6 +3,16 @@ package com.hacktiv8.bux.model;
 public class Ticket {
     String idTicket, idTrip, seatNo, platno , toTgl, total, transaksi, status ;
 
+    public Boolean getRated() {
+        return rated;
+    }
+
+    public void setRated(Boolean rated) {
+        this.rated = rated;
+    }
+
+    Boolean rated;
+
     public String getIdTicket() {
         return idTicket;
     }

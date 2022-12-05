@@ -66,6 +66,7 @@ public class CreditCardVerificationActivity extends AppCompatActivity {
             idTiket = UUID.randomUUID().toString();
             String tranfer = "Master Card";
             String status = "Paid";
+            Boolean rate = false;
 
             Ticket addOrder = new Ticket();
             addOrder.setIdTicket(idTiket);
@@ -76,8 +77,7 @@ public class CreditCardVerificationActivity extends AppCompatActivity {
             addOrder.setToTgl(toTgl);
             addOrder.setTransaksi(tranfer);
             addOrder.setStatus(status);
-
-            order(phoneNumber, idTiket, addOrder);
+            addOrder.setRated(rate);
 
         });
 
