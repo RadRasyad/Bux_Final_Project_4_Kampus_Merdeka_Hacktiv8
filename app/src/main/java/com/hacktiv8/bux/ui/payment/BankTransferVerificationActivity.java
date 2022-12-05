@@ -19,8 +19,10 @@ import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityBankTransferBinding;
 import com.hacktiv8.bux.databinding.ActivityBankTransferVerificationBinding;
 import com.hacktiv8.bux.model.Ticket;
+import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.model.User;
 import com.hacktiv8.bux.ui.MainActivity;
+import com.hacktiv8.bux.utils.DateHelper;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -29,11 +31,12 @@ import java.util.UUID;
 public class BankTransferVerificationActivity extends AppCompatActivity {
 
     private ActivityBankTransferVerificationBinding binding;
-    private String total, tripId, platBus, bookedSeat, toTgl, email, idTiket, phoneNumber;
+    private String total, tripId, platBus, bookedSeat, toTgl, email, phoneNumber, bookNo, tgl;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private User user;
+    private Trip trip;
     public static final String EXTRA_TRIP_ID = "extra_tripid";
     public static final String EXTRA_BUS_NO = "extra_busno";
     public static final String EXTRA_BOOKED_SEAT = "extra_booked_seat";
@@ -55,6 +58,7 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
         tripId = getIntent().getStringExtra(EXTRA_TRIP_ID);
+        getTripData(tripId);
         platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
         bookedSeat = getIntent().getStringExtra(EXTRA_BOOKED_SEAT);
         total = getIntent().getStringExtra(EXTRA_TOTAL);
@@ -63,13 +67,12 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
         binding.totalPaymentTv.setText(formatRupiah.format((double)dTotal));
 
         binding.btnVerifyPayment.setOnClickListener(v ->{
-            idTiket = UUID.randomUUID().toString();
             String tranfer = "Bank BNI";
             String status = "Paid";
             Boolean rate = false;
 
             Ticket addOrder = new Ticket();
-            addOrder.setIdTicket(idTiket);
+            addOrder.setBookNo(bookNo);
             addOrder.setIdTrip(tripId);
             addOrder.setPlatno(platBus);
             addOrder.setSeatNo(bookedSeat);
@@ -79,7 +82,8 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
             addOrder.setStatus(status);
             addOrder.setRated(rate);
 
-            order(phoneNumber, idTiket, addOrder);
+
+            order(phoneNumber, bookNo, addOrder);
 
         });
 
@@ -93,9 +97,6 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
                             user = documentSnapshot.toObject(User.class);
                             getPhoneNumber(user);
                         }
-
-
-
                     }
 
                 });
@@ -106,11 +107,35 @@ public class BankTransferVerificationActivity extends AppCompatActivity {
         phoneNumber = user.getPhoneNumber();
     }
 
-    private void order(String email, String idTiket, Ticket ticket){
+    private void getTripData(String tripId) {
+        db.collection("trip").whereEqualTo("idTrip", tripId)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                            trip = documentSnapshot.toObject(Trip.class);
+                            getBookNo(trip);
+                        }
+                    }
+
+                });
+
+    }
+
+    private void getBookNo(Trip trip){
+        tgl = DateHelper.timestampToBookNo(trip.getDate());
+        String strNew = tripId.replaceAll("([a-z])","");
+        if(strNew.length() == 1){
+            strNew = "0" +strNew;
+        }
+        bookNo = tgl + "-"+ strNew + bookedSeat;
+
+    }
+
+    private void order(String email, String bookNo, Ticket ticket){
         db.collection("user")
                 .document(email)
                 .collection("order")
-                .document(idTiket)
+                .document(bookNo)
                 .set(ticket)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

@@ -1,7 +1,17 @@
 package com.hacktiv8.bux.model;
 
 public class Ticket {
-    String idTicket, idTrip, seatNo, platno , toTgl, total, transaksi, status ;
+    String bookNo, idTrip, seatNo, platno , toTgl, total, transaksi, status ;
+    Boolean rated;
+
+
+    public String getBookNo() {
+        return bookNo;
+    }
+
+    public void setBookNo(String bookNo) {
+        this.bookNo = bookNo;
+    }
 
     public Boolean getRated() {
         return rated;
@@ -11,15 +21,6 @@ public class Ticket {
         this.rated = rated;
     }
 
-    Boolean rated;
-
-    public String getIdTicket() {
-        return idTicket;
-    }
-
-    public void setIdTicket(String idTicket) {
-        this.idTicket = idTicket;
-    }
 
     public String getIdTrip() {
         return idTrip;

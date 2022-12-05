@@ -64,11 +64,11 @@ public class DetailPaymentActivity extends AppCompatActivity {
             finish();
         }
 
-        getSeatsData(platBus);
+//        getSeatsData(platBus);
         getUserData(userId);
         getTrip(tripId);
 
-        binding.titleName.setText(platBus);
+        binding.seatNo.setText(bookedSeat);
 
 
         binding.btnPayment.setOnClickListener(v ->{
@@ -81,28 +81,8 @@ public class DetailPaymentActivity extends AppCompatActivity {
             );
         });
 
-
-
-
     }
 
-    private void getSeatsData(String platNo) {
-
-        db.collection("bus")
-                .document(platNo)
-                .collection("seats")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
-                            seats = documentSnapshot.toObject(Seats.class);
-                            binding.seatNo.setText(seats.getSeatNo());
-
-                        }
-
-                    }
-                });
-    }
 
     private void getUserData(String userId) {
         db.collection("user").document(userId)
@@ -167,7 +147,7 @@ public class DetailPaymentActivity extends AppCompatActivity {
         binding.to.setText(trip.getArrivalCity());
         binding.toTerminal.setText("Terminal "+trip.getArrivalTerminal());
         binding.estimasiTime.setText(trip.getEtaJam());
-        String jumSeats = "2";
+        String jumSeats = "1";
         int price = Integer.parseInt(trip.getPrice());
         int seats = Integer.parseInt(jumSeats);
         double dTotal = price * seats;
