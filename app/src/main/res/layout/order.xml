@@ -26,7 +26,7 @@
                 android:layout_marginStart="10dp"
                 android:text="23 Desember 2022"
                 android:textColor="@color/lightGrey"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/jam"
@@ -37,7 +37,7 @@
                 android:layout_toRightOf="@id/tgl"
                 android:text="18:25"
                 android:textColor="@color/lightGrey"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
 
             <TextView
@@ -113,11 +113,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/terminalBus"
-            android:layout_toRightOf="@id/timeBus"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="12dp"
-            android:textColor="@color/text"
-            android:text="Medan"/>
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/timeBus"
+            android:text="Medan"
+            android:textColor="@color/text" />
 
         <ImageView
             android:layout_width="20dp"

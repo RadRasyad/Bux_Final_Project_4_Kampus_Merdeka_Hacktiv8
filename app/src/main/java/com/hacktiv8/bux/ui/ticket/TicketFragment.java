@@ -12,29 +12,43 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hacktiv8.bux.databinding.FragmentTicketBinding;
+import com.hacktiv8.bux.model.Order;
 import com.hacktiv8.bux.model.User;
 import com.hacktiv8.bux.ui.MainActivity;
+import com.hacktiv8.bux.ui.adapter.TicketAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TicketFragment extends Fragment {
 
     private FirebaseFirestore db;
     private FragmentTicketBinding binding;
+    private List<Order> orderList = new ArrayList<>();
+    private TicketAdapter ticketAdapter;
+    private RecyclerView rvTicket;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTicketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        rvTicket = binding.rvTicket;
+
         db = FirebaseFirestore.getInstance();
         String userId = "088228659668";
 //        Log.d("Extra idUser Detail", userId);
         getUserData(userId);
 
+        rvTicket.setHasFixedSize(true);
+        rvTicket.setLayoutManager(new LinearLayoutManager(this));
 
         return root;
     }
@@ -65,6 +79,11 @@ public class TicketFragment extends Fragment {
                 });
     }
 
-//    private void tiket(User user) {
-//    }
+    private void getData(){
+
+    }
+
+   //private void tiket(User user) {
+   //}
+
 }
