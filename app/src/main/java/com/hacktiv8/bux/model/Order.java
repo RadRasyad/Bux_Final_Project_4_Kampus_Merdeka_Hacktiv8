@@ -1,8 +1,9 @@
 package com.hacktiv8.bux.model;
 
 public class Order {
-    String bookNo, departHour, busName, platBus, departTerminal, departCity, status;
+    String bookNo, platBus, status, transaksi, idTrip, seatNo, toTgl;
     Long date;
+    boolean rated;
 
     public String getBookNo() {
         return bookNo;
@@ -10,22 +11,6 @@ public class Order {
 
     public void setBookNo(String bookNo) {
         this.bookNo = bookNo;
-    }
-
-    public String getDepartHour() {
-        return departHour;
-    }
-
-    public void setDepartHour(String departHour) {
-        this.departHour = departHour;
-    }
-
-    public String getBusName() {
-        return busName;
-    }
-
-    public void setBusName(String busName) {
-        this.busName = busName;
     }
 
     public String getPlatBus() {
@@ -36,22 +21,6 @@ public class Order {
         this.platBus = platBus;
     }
 
-    public String getDepartTerminal() {
-        return departTerminal;
-    }
-
-    public void setDepartTerminal(String departTerminal) {
-        this.departTerminal = departTerminal;
-    }
-
-    public String getDepartCity() {
-        return departCity;
-    }
-
-    public void setDepartCity(String departCity) {
-        this.departCity = departCity;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -60,11 +29,53 @@ public class Order {
         this.status = status;
     }
 
-    public int getDate() {
+    public String getTransaksi() {
+        return transaksi;
+    }
+
+    public void setTransaksi(String transaksi) {
+        this.transaksi = transaksi;
+    }
+
+    public String getIdTrip() {
+        return idTrip;
+    }
+
+    public void setIdTrip(String idTrip) {
+        this.idTrip = idTrip;
+    }
+
+    public String getSeatNo() {
+        return seatNo;
+    }
+
+    public void setSeatNo(String seatNo) {
+        this.seatNo = seatNo;
+    }
+
+    public String getToTgl() {
+        return toTgl;
+    }
+
+    public void setToTgl(String toTgl) {
+        this.toTgl = toTgl;
+    }
+
+    public Long getDate() {
         return date;
     }
 
     public void setDate(Long date) {
         this.date = date;
     }
+
+    public boolean isRated() {
+        return rated;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
+    }
+
+
 }

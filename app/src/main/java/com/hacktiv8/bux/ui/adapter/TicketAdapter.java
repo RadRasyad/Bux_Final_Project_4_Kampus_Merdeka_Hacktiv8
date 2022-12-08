@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hacktiv8.bux.databinding.OrderBinding;
 import com.hacktiv8.bux.model.Order;
 import com.hacktiv8.bux.model.Ticket;
@@ -20,7 +21,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
     private Context context;
     private List<Order> list;
 
-    public TicketAdapter(Context context, List<Order> list) {
+    public TicketAdapter(Context context, List<Order> list, FirebaseFirestore db) {
         this.context = context;
         this.list = list;
     }
@@ -46,6 +47,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+
         private final OrderBinding binding;
 
         public MyViewHolder(OrderBinding binding) {
@@ -54,14 +56,18 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
         }
 
         public void bind(Order order){
-           binding.jam.setText(order.getDepartHour());
            binding.idTicket.setText(order.getBookNo());
-           binding.nameBus.setText(order.getBusName());
            binding.platBus.setText(order.getPlatBus());
-           binding.tgl.setText(DateHelper.timestampToLocalDate(order.getDate()));
-           binding.terminalBus.setText(order.getDepartTerminal());
-           binding.destBus.setText(order.getDepartCity());
            binding.status.setText(order.getStatus());
+
         }
+    }
+
+    private void getBusData() {
+
+    }
+
+    private void getTripData() {
+
     }
 }

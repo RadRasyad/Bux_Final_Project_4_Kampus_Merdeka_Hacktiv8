@@ -62,7 +62,6 @@ public class SeatChooserActivity extends AppCompatActivity {
 
         binding.btnBookNow.setOnClickListener(v -> {
             if (alreadyBook) {
-                //TODO intent data EXTRA_TRIP_ID, EXTRA_BUS_NO, bookedSeat
                 startActivity(new Intent(this, DetailPaymentActivity.class)
                         .putExtra(DetailPaymentActivity.EXTRA_TRIP_ID, tripId)
                         .putExtra(DetailPaymentActivity.EXTRA_BUS_NO, platBus)
