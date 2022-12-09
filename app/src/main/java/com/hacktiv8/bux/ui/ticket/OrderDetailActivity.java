@@ -1,11 +1,22 @@
 package com.hacktiv8.bux.ui.ticket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.slider.Slider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -15,6 +26,8 @@ import com.hacktiv8.bux.model.Bus;
 import com.hacktiv8.bux.model.Order;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.model.User;
+import com.hacktiv8.bux.ui.MainActivity;
+import com.hacktiv8.bux.ui.payment.CreditCardVerificationActivity;
 import com.hacktiv8.bux.utils.DateHelper;
 
 public class OrderDetailActivity extends AppCompatActivity {
@@ -52,6 +65,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         }
         if (platBus != null) {
             getBusData(platBus);
+        }
+        if (!isRated) {
+            showRatingDialog();
         }
 
     }
@@ -156,6 +172,44 @@ public class OrderDetailActivity extends AppCompatActivity {
     private void populateBusData(Bus bus) {
         binding.nameBus.setText(bus.getBusName());
         binding.platBus.setText(bus.getPlatno());
+    }
+
+    private void showRatingDialog() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_rating_layout);
+
+        dialog.findViewById(R.id.btnRateTrip).setOnClickListener(v -> {
+            updateOrderData();
+            dialog.dismiss();
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.CENTER);
+    }
+
+    private void updateOrderData() {
+        order.setRated(true);
+
+        db.collection("user")
+                .document(user.getPhoneNumber())
+                .collection("order")
+                .document(bookNo)
+                .set(order)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
 }
