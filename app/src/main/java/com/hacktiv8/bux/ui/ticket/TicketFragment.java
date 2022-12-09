@@ -58,6 +58,13 @@ public class TicketFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        String userId = auth.getCurrentUser().getUid();
+        getUserData(userId);
+    }
+
     private void getUserData(String userId) {
         db.collection("user")
                 .whereEqualTo("uid", userId)
