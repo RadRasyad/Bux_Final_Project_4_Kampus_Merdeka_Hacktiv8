@@ -41,6 +41,16 @@ public class DateHelper {
         return sdf.format(d);
     }
 
+    public static String timestampToLocalDate4(long ts) {
+
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(ts);
+        java.util.Date d = c.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+
+        return sdf.format(d);
+    }
+
     public static String timestampToBookNo(long ts) {
 
         Calendar c = Calendar.getInstance();

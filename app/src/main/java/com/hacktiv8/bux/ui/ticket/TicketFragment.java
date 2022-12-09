@@ -1,11 +1,6 @@
 package com.hacktiv8.bux.ui.ticket;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.hacktiv8.bux.databinding.FragmentTicketBinding;
 import com.hacktiv8.bux.model.Order;
-import com.hacktiv8.bux.model.Ticket;
-import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.model.User;
-import com.hacktiv8.bux.ui.MainActivity;
 import com.hacktiv8.bux.ui.adapter.TicketAdapter;
 
 import java.util.ArrayList;
@@ -55,7 +45,6 @@ public class TicketFragment extends Fragment {
         String userId = auth.getCurrentUser().getUid();
 
         getUserData(userId);
-        Log.d("user uid", userId);
 
         rvTicket.setHasFixedSize(true);
         rvTicket.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -74,14 +63,16 @@ public class TicketFragment extends Fragment {
                 .whereEqualTo("uid", userId)
                 .get()
                 .addOnCompleteListener(task -> {
+                    progressBar(true);
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         currentUser = documentSnapshot.toObject(User.class);
                     }
                     getOrderData(currentUser.getPhoneNumber());
+                    progressBar(false);
                 });
     }
 
-    private void getOrderData(String phoneNumber){
+    private void getOrderData(String phoneNumber) {
         db.collection("user")
                 .document(phoneNumber)
                 .collection("order")
@@ -92,12 +83,12 @@ public class TicketFragment extends Fragment {
                             Order ticket = documentSnapshot.toObject(Order.class);
                             orderList.add(ticket);
                         }
-                        if (orderList.size()>0) {
+                        if (orderList.size() > 0) {
                             ticketAdapter = new TicketAdapter(requireContext(), orderList, db);
                             ticketAdapter.notifyDataSetChanged();
                             rvTicket.setAdapter(ticketAdapter);
                         } else {
-                            //
+                            emptyState(true);
                         }
 
                     } else {
@@ -106,5 +97,20 @@ public class TicketFragment extends Fragment {
                 });
     }
 
+    private void progressBar(boolean state) {
+        if (state) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void emptyState(boolean state) {
+        if (state) {
+            binding.emptyState.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            binding.emptyState.getRoot().setVisibility(View.GONE);
+        }
+    }
 
 }

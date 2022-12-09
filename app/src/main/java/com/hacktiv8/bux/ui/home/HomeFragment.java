@@ -92,20 +92,20 @@ public class HomeFragment extends Fragment {
         outState.putParcelable("departure", departureCity);
         outState.putParcelable("arrival", arrivalCity);
         outState.putSerializable("date", calendar);
-        outState.putString("passengers", binding.passangers.getText().toString());
+//        outState.putString("passengers", binding.passangers.getText().toString());
     }
 
     private void onStateData(Bundle savedInstanceState) {
         departureCity = savedInstanceState.getParcelable("departure");
         arrivalCity = savedInstanceState.getParcelable("arrival");
         calendar = (Calendar) savedInstanceState.getSerializable("date");
-        String passengers = savedInstanceState.getString("passengers");
+//        String passengers = savedInstanceState.getString("passengers");
 
         if(calendar!=null) binding.date.setText(format.format(calendar.getTime()));
         if(departureCity!=null) binding.departure.setText(departureCity.getCity());
         if(arrivalCity!=null) binding.arrival.setText(arrivalCity.getCity());
 
-        binding.passangers.setText(passengers);
+//        binding.passangers.setText(passengers);
     }
 
     private void onSearchActivity() {

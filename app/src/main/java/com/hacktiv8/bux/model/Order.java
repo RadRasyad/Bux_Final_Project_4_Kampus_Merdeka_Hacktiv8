@@ -1,9 +1,23 @@
 package com.hacktiv8.bux.model;
 
 public class Order {
-    String bookNo, platBus, status, transaksi, idTrip, seatNo, toTgl;
-    Long date;
+    String bookNo;
+    String platno;
+    String status;
+    String transaksi;
+    String total;
+    String idTrip;
+    String seatNo;
+    String toTgl;
     boolean rated;
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
 
     public String getBookNo() {
         return bookNo;
@@ -13,12 +27,12 @@ public class Order {
         this.bookNo = bookNo;
     }
 
-    public String getPlatBus() {
-        return platBus;
+    public String getPlatno() {
+        return platno;
     }
 
-    public void setPlatBus(String platBus) {
-        this.platBus = platBus;
+    public void setPlatno(String platno) {
+        this.platno = platno;
     }
 
     public String getStatus() {
@@ -59,14 +73,6 @@ public class Order {
 
     public void setToTgl(String toTgl) {
         this.toTgl = toTgl;
-    }
-
-    public Long getDate() {
-        return date;
-    }
-
-    public void setDate(Long date) {
-        this.date = date;
     }
 
     public boolean isRated() {
