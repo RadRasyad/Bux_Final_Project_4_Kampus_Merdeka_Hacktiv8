@@ -80,6 +80,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
                 intent.putExtra(OrderDetailActivity.EXTRA_TRIP_ID, order.getIdTrip());
                 intent.putExtra(OrderDetailActivity.EXTRA_BUS_NO, order.getPlatno());
                 intent.putExtra(OrderDetailActivity.EXTRA_RATING_STATE, order.isRated());
+                intent.putExtra(OrderDetailActivity.EXTRA_STATUS, order.getStatus());
+                intent.putExtra(OrderDetailActivity.EXTRA_BUS_NAME, bus.getBusName());
+                intent.putExtra(OrderDetailActivity.EXTRA_DEPART_DATE, DateHelper.timestampToLocalDate4(trip.getDate()));
                 itemView.getContext().startActivity(intent);
             });
         }

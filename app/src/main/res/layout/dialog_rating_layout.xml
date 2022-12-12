@@ -10,7 +10,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="How was your trip?"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/busName"
+        android:id="@+id/dBusName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -68,11 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Departure date"
-        app:layout_constraintStart_toStartOf="@id/busName"
-        app:layout_constraintTop_toBottomOf="@+id/busName" />
+        app:layout_constraintStart_toStartOf="@id/dBusName"
+        app:layout_constraintTop_toBottomOf="@+id/dBusName" />
 
     <TextView
-        android:id="@+id/departDate"
+        android:id="@+id/ddepartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toTopOf="@+id/labelPOName" />
 
     <TextView
-        android:id="@+id/busNo"
+        android:id="@+id/dbusNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toTopOf="@+id/labelDepartdate" />
 
     <TextView
-        android:id="@+id/ticketStatus"
+        android:id="@+id/dticketStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -131,7 +131,7 @@
         android:text="Please give your rating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ticketStatus" />
+        app:layout_constraintTop_toBottomOf="@+id/dticketStatus" />
 
     <RatingBar
         android:id="@+id/ratingBar"

@@ -39,7 +39,10 @@ public class OrderDetailActivity extends AppCompatActivity {
     public static final String EXTRA_BUS_NO = "extra_bus_no";
     public static final String EXTRA_BOOK_NO = "extra_book_no";
     public static final String EXTRA_RATING_STATE = "extra_rating_state";
-    private String tripId, platBus, bookNo;
+    public static final String EXTRA_STATUS = "extra_status";
+    public static final String EXTRA_BUS_NAME = "extra_bus_name";
+    public static final String EXTRA_DEPART_DATE = "extra_depart_date";
+    private String tripId, platBus, bookNo, busName, departDate, status;
     private boolean isRated;
     private Order order;
     private Trip trip;
@@ -59,6 +62,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         tripId = getIntent().getStringExtra(EXTRA_TRIP_ID);
         platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
         bookNo = getIntent().getStringExtra(EXTRA_BOOK_NO);
+        busName = getIntent().getStringExtra(EXTRA_BUS_NAME);
+        departDate = getIntent().getStringExtra(EXTRA_DEPART_DATE);
+        status = getIntent().getStringExtra(EXTRA_STATUS);
 
         if (tripId != null) {
             getTripData(tripId);
@@ -184,6 +190,16 @@ public class OrderDetailActivity extends AppCompatActivity {
             updateOrderData();
             dialog.dismiss();
         });
+
+        TextView vbusName = dialog.findViewById(R.id.dBusName);
+        TextView departureDate = dialog.findViewById(R.id.ddepartDate);
+        TextView busNo = dialog.findViewById(R.id.dbusNo);
+        TextView ticketStatus = dialog.findViewById(R.id.dticketStatus);
+
+        busNo.setText(platBus);
+        ticketStatus.setText(status);
+        vbusName.setText(busName);
+        departureDate.setText(departDate);
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
