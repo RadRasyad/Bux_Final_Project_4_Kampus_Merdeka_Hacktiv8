@@ -4,21 +4,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class City implements Parcelable {
-    private String id, city;
+    private String id, city, terminal;
 
     public City(){
 
     }
 
-    public City(String id, String city) {
+    public String getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(String terminal) {
+        this.terminal = terminal;
+    }
+
+
+    public City(String id, String city, String terminal) {
         this.id = id;
         this.city = city;
+        this.terminal = terminal;
 
     }
 
     protected City(Parcel in) {
         id = in.readString();
         city = in.readString();
+        terminal = in.readString();
 
     }
 
@@ -60,5 +71,6 @@ public class City implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
         parcel.writeString(city);
+        parcel.writeString(terminal);
     }
 }

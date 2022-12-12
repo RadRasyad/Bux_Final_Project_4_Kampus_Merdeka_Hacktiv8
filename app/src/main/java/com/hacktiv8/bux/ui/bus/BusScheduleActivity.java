@@ -1,5 +1,7 @@
 package com.hacktiv8.bux.ui.bus;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.hacktiv8.bux.databinding.ActivityBusScheduleBinding;
 import com.hacktiv8.bux.model.City;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.ui.adapter.TripAdapter;
+import com.hacktiv8.bux.ui.chooser.DestinationChooserActivity;
 import com.hacktiv8.bux.utils.DateHelper;
 
 import java.text.SimpleDateFormat;
@@ -29,12 +32,11 @@ public class BusScheduleActivity extends AppCompatActivity {
     private List<Trip> tripList = new ArrayList<>();
     private City departure;
     private City arrival;
-    private Calendar calendar;
-    private String passengers;
-    private SimpleDateFormat format, date;
+    private String passengers, dep, arr;
     private TripAdapter tripAdapter;
     private RecyclerView rvTrip;
     private long timeInMillis;
+    private boolean bolData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,6 @@ public class BusScheduleActivity extends AppCompatActivity {
         departure = getIntent().getParcelableExtra("departure");
         arrival = getIntent().getParcelableExtra("arrival");
         passengers = getIntent().getStringExtra("passengers");
-        calendar =  (Calendar)getIntent().getSerializableExtra("date");
-        format = new SimpleDateFormat("EEE, d MMM yyyy");
-        date = new SimpleDateFormat("d MMM yyyy");
         timeInMillis = getIntent().getLongExtra("timeInMillis", 0);
 
         String displayPassengers = "Seat " +passengers;
@@ -66,7 +65,70 @@ public class BusScheduleActivity extends AppCompatActivity {
 
         rvTrip.setHasFixedSize(true);
         rvTrip.setLayoutManager(new LinearLayoutManager(this));
-        getData(from, to);
+        Intent intent = new Intent(getApplicationContext(), DestinationChooserActivity.class);
+        binding.card1.setOnClickListener(v -> {
+            startActivityForResult(intent, 1);
+            bolData = true;
+        });
+
+        binding.card2.setOnClickListener(v -> {
+            startActivityForResult(intent, 2);
+            bolData = true;
+        });
+
+        if(savedInstanceState != null){
+            onStateData(savedInstanceState);
+        }
+
+
+        if(bolData == true){
+            Log.i("gudal", dep + " " +arr);
+//            getData(dep, arr);
+        }else {
+            getData(from, to);
+        }
+
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("departure", departure);
+        outState.putParcelable("arrival", arrival);
+
+    }
+
+    private void onStateData(Bundle savedInstanceState) {
+        departure = savedInstanceState.getParcelable("departure");
+        arrival = savedInstanceState.getParcelable("arrival");
+
+        if(departure!=null) binding.departure.setText(departure.getCity());
+        if(arrival!=null) binding.arrival.setText(arrival.getCity());
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(data != null && resultCode == RESULT_OK){
+                    departure = data.getParcelableExtra("city");
+                    binding.departure.setText(departure.getCity());
+                    dep = departure.getCity();
+
+
+                }
+                break;
+            case 2:
+                if(data != null && resultCode == RESULT_OK){
+                    arrival = data.getParcelableExtra("city");
+                    binding.arrival.setText(arrival.getCity());
+                    arr = arrival.getCity();
+
+                }
+                break;
+        }
 
     }
 
@@ -113,5 +175,7 @@ public class BusScheduleActivity extends AppCompatActivity {
             binding.emptyState.getRoot().setVisibility(View.GONE);
         }
     }
+
+
 
 }

@@ -130,6 +130,8 @@ public class BusDetailActivity extends AppCompatActivity {
             );
             binding.destinationCity.setText(tripData.getArrivalCity());
             binding.destinationTime.setText(tripData.getArrivalHour());
+            binding.tvCalculation.setText("1 x " + tripData.getPrice());
+            binding.tvFinalPrice.setText("Rp " + tripData.getPrice());
         } else {
             Toast.makeText(this ,"Failed to get data", Toast.LENGTH_SHORT).show();
         }

@@ -41,10 +41,10 @@ public class DestinationChooserActivity extends AppCompatActivity {
         list = new ArrayList<>();
 
         // add data
-        list.add(new City("1","Semarang"));
-        list.add(new City("2","Surabaya"));
-        list.add(new City("3","Bandung"));
-        list.add(new City("4","Jakarta"));
+        list.add(new City("1","Semarang", "Mangkang"));
+        list.add(new City("2","Surabaya", "Bungurasih"));
+        list.add(new City("3","Bandung", "Leuwi Panjang"));
+        list.add(new City("4","Jakarta", "Senen"));
 
         data();
 

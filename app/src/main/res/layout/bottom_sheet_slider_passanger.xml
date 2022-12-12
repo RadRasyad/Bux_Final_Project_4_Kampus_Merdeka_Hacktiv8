@@ -57,7 +57,7 @@
         android:layout_marginBottom="80dp"
         android:valueFrom="0"
         android:stepSize="1"
-        android:valueTo="10"
+        android:valueTo="1"
         app:layout_constraintBottom_toTopOf="@+id/btnCancelPassanger"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

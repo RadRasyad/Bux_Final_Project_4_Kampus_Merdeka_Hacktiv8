@@ -209,6 +209,8 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private void updateOrderData() {
         order.setRated(true);
+        order.setStatus("Issued");
+
 
         db.collection("user")
                 .document(user.getPhoneNumber())

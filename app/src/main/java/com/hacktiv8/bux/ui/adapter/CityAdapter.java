@@ -69,6 +69,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
         public void bind(City city){
             binding.tvKota.setText(city.getCity());
+            binding.tvTerminal.setText("Terminal " + city.getTerminal());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

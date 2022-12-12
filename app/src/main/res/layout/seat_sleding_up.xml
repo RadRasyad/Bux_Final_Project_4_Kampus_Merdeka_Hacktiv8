@@ -66,8 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="14dp"
-            android:min="1"
-            android:max="10"
+            android:min="0"
+            android:max="1"
             android:thumbTint="@color/primary"
             tools:targetApi="o"/>
 

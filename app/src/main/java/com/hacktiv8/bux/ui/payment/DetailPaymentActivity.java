@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -16,6 +18,7 @@ import com.hacktiv8.bux.databinding.ActivityDetailPaymentBinding;
 import com.hacktiv8.bux.model.Seats;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.model.User;
+import com.hacktiv8.bux.utils.DateHelper;
 
 import java.lang.reflect.Array;
 import java.text.NumberFormat;
@@ -26,10 +29,12 @@ public class DetailPaymentActivity extends AppCompatActivity {
 
     private ActivityDetailPaymentBinding binding;
     private FirebaseFirestore db;
-    private Seats seats;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
     private Trip trip;
+    private User user;
     private String total;
-    private String tripId, platBus, bookedSeat, userId, toTgl;
+    private String tripId, platBus, bookedSeat, email, toTgl;
     public static final String EXTRA_TRIP_ID = "extra_tripid";
     public static final String EXTRA_BUS_NO = "extra_busno";
     public static final String EXTRA_BOOKED_SEAT = "extra_booked_seat";
@@ -44,10 +49,12 @@ public class DetailPaymentActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        email = currentUser.getEmail();
         tripId  = getIntent().getStringExtra(EXTRA_TRIP_ID);
         platBus = getIntent().getStringExtra(EXTRA_BUS_NO);
         bookedSeat = getIntent().getStringExtra(EXTRA_BOOKED_SEAT);
-        userId = "088228659668";
 
 
         if (tripId==null) {
@@ -65,7 +72,7 @@ public class DetailPaymentActivity extends AppCompatActivity {
         }
 
 //        getSeatsData(platBus);
-        getUserData(userId);
+        getUserData(email);
         getTrip(tripId);
 
         binding.seatNo.setText(bookedSeat);
@@ -84,20 +91,36 @@ public class DetailPaymentActivity extends AppCompatActivity {
     }
 
 
-    private void getUserData(String userId) {
-        db.collection("user").document(userId)
+//    private void getUserData(String email) {
+//        db.collection("user").document(email)
+//                .get().addOnCompleteListener(task -> {
+//                    if(task.isSuccessful()){
+//                        DocumentSnapshot doc = task.getResult();
+//                        user = doc.toObject(User.class);
+//                        binding.name.setText(user.getName());
+//                        binding.phone.setText(user.getPhoneNumber());
+//
+//                    }
+//
+//                });
+//
+//    }
+
+    private void getUserData(String email) {
+        db.collection("user").whereEqualTo("email", email)
                 .get().addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        DocumentSnapshot doc = task.getResult();
-                        User user = doc.toObject(User.class);
-                        binding.name.setText(user.getName());
-                        binding.phone.setText(user.getPhoneNumber());
-
+                        for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
+                            user = documentSnapshot.toObject(User.class);
+                            binding.name.setText(user.getName());
+                            binding.phone.setText(user.getPhoneNumber());
+                        }
                     }
 
                 });
 
     }
+
 
     private void getTrip(String tripId) {
         db.collection("trip").document(tripId)
@@ -120,7 +143,7 @@ public class DetailPaymentActivity extends AppCompatActivity {
         String[] deparTime = null;
         String[] arrivalTime = null;
         String[] date = null;
-        String tanggal = "20 Des 2022";
+        String tanggal = DateHelper.timestampToLocalDate4(trip.getDate());
         binding.fromTgl.setText(tanggal);
         date = tanggal.split(" ");
         deparTime   = trip.getDepartHour().split(":");
