@@ -51,6 +51,7 @@
         android:layout_width="160dp"
         android:layout_height="70dp"
         app:cardCornerRadius="12dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,6 +92,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp">
         <RelativeLayout
+            android:id="@+id/btnDateSelect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
@@ -117,6 +119,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp">
         <RelativeLayout
+            android:id="@+id/seatSelect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">

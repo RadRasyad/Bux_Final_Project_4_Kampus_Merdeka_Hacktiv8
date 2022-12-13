@@ -30,7 +30,7 @@ public class DatePickerActivity extends AppCompatActivity {
         });
 
         binding.btnSearch.setOnClickListener(v -> {
-            setResult(RESULT_OK, new Intent().putExtra("date", calendar).putExtra("timeInMillis", calendar.getTimeInMillis()));
+            setResult(RESULT_OK, new Intent().putExtra("date", calendar).putExtra("dtimeInMillis", calendar.getTimeInMillis()));
             onBackPressed();
         });
     }

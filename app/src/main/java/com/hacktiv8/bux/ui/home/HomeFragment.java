@@ -132,8 +132,7 @@ public class HomeFragment extends Fragment {
             case 1:
                 if(data != null && resultCode == RESULT_OK){
                     calendar = (Calendar) data.getSerializableExtra("date");
-                    timeInMillis = (long) data.getSerializableExtra("timeInMillis");
-                    Log.d("timeInMillis", String.valueOf(timeInMillis));
+                    timeInMillis = (long) data.getSerializableExtra("dtimeInMillis");
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM");
                     binding.date.setText(simpleDateFormat.format(calendar.getTime()));
                 }

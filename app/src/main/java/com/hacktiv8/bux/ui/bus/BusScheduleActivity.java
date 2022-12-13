@@ -6,17 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.TextView;
 
+import com.google.android.material.slider.Slider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.hacktiv8.bux.R;
 import com.hacktiv8.bux.databinding.ActivityBusScheduleBinding;
 import com.hacktiv8.bux.model.City;
 import com.hacktiv8.bux.model.Trip;
 import com.hacktiv8.bux.ui.adapter.TripAdapter;
+import com.hacktiv8.bux.ui.chooser.DatePickerActivity;
 import com.hacktiv8.bux.ui.chooser.DestinationChooserActivity;
 import com.hacktiv8.bux.utils.DateHelper;
 
@@ -33,10 +41,11 @@ public class BusScheduleActivity extends AppCompatActivity {
     private City departure;
     private City arrival;
     private String passengers, dep, arr;
+    private int valuePassanger;
+    private int lastValuePassanger;
     private TripAdapter tripAdapter;
     private RecyclerView rvTrip;
     private long timeInMillis;
-    private boolean bolData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +62,7 @@ public class BusScheduleActivity extends AppCompatActivity {
         passengers = getIntent().getStringExtra("passengers");
         timeInMillis = getIntent().getLongExtra("timeInMillis", 0);
 
-        String displayPassengers = "Seat " +passengers;
+        String displayPassengers = "Seat " + passengers;
 
         binding.seats.setText(displayPassengers);
         binding.departure.setText(departure.getCity());
@@ -70,12 +79,18 @@ public class BusScheduleActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), DestinationChooserActivity.class);
         binding.card1.setOnClickListener(v -> {
             startActivityForResult(intent, 1);
-            bolData = true;
         });
 
         binding.card2.setOnClickListener(v -> {
             startActivityForResult(intent, 2);
-            bolData = true;
+        });
+
+        binding.seatSelect.setOnClickListener(v -> {
+            showSheetSlider();
+        });
+
+        binding.date.setOnClickListener(v ->{
+            startActivityForResult(new Intent(this, DatePickerActivity.class), 3);
         });
 
         if(savedInstanceState != null){
@@ -114,7 +129,6 @@ public class BusScheduleActivity extends AppCompatActivity {
                     binding.departure.setText(departure.getCity());
                     dep = departure.getCity();
                     getData(dep, arr);
-
                 }
                 break;
             case 2:
@@ -122,6 +136,13 @@ public class BusScheduleActivity extends AppCompatActivity {
                     arrival = data.getParcelableExtra("city");
                     binding.arrival.setText(arrival.getCity());
                     arr = arrival.getCity();
+                    getData(dep, arr);
+                }
+                break;
+            case 3:
+                if(data != null && resultCode == RESULT_OK){
+                    timeInMillis = (long) data.getSerializableExtra("dtimeInMillis");
+                    binding.date.setText(DateHelper.timestampToLocalDate3(timeInMillis));
                     getData(dep, arr);
                 }
                 break;
@@ -156,6 +177,44 @@ public class BusScheduleActivity extends AppCompatActivity {
                         emptyState(true);
                     }
                 });
+    }
+
+    private void showSheetSlider() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet_slider_passanger);
+
+        TextView totalSeat = dialog.findViewById(R.id.tvNumberSlider);
+
+        Slider slider = dialog.findViewById(R.id.sliderPassanger);
+        slider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                valuePassanger = (int) value;
+                lastValuePassanger = (int) value;
+                totalSeat.setText(String.valueOf(valuePassanger));
+            }
+        });
+
+        dialog.findViewById(R.id.btnCancelPassanger).setOnClickListener(v -> {
+            valuePassanger = 0;
+            dialog.dismiss();
+        });
+
+        dialog.findViewById(R.id.btnSelect).setOnClickListener(v -> {
+            String displayPassengers = "Seat " + lastValuePassanger;
+            passengers = String.valueOf(lastValuePassanger);
+            binding.seats.setText(displayPassengers);
+            getData(dep, arr);
+            dialog.dismiss();
+        });
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     private void progressBar(boolean state) {
