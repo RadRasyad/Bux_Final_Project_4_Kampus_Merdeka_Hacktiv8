@@ -61,7 +61,9 @@ public class BusScheduleActivity extends AppCompatActivity {
         binding.date.setText(DateHelper.timestampToLocalDate3(timeInMillis));
 
         String from = binding.departure.getText().toString();
+        dep = from;
         String to = binding.arrival.getText().toString();
+        arr = to;
 
         rvTrip.setHasFixedSize(true);
         rvTrip.setLayoutManager(new LinearLayoutManager(this));
@@ -80,13 +82,8 @@ public class BusScheduleActivity extends AppCompatActivity {
             onStateData(savedInstanceState);
         }
 
+        getData(from, to);
 
-        if(bolData == true){
-            Log.i("gudal", dep + " " +arr);
-//            getData(dep, arr);
-        }else {
-            getData(from, to);
-        }
 
     }
 
@@ -116,7 +113,7 @@ public class BusScheduleActivity extends AppCompatActivity {
                     departure = data.getParcelableExtra("city");
                     binding.departure.setText(departure.getCity());
                     dep = departure.getCity();
-
+                    getData(dep, arr);
 
                 }
                 break;
@@ -125,7 +122,7 @@ public class BusScheduleActivity extends AppCompatActivity {
                     arrival = data.getParcelableExtra("city");
                     binding.arrival.setText(arrival.getCity());
                     arr = arrival.getCity();
-
+                    getData(dep, arr);
                 }
                 break;
         }
@@ -143,11 +140,12 @@ public class BusScheduleActivity extends AppCompatActivity {
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         tripList.clear();
-                        emptyState(false);
+
                         for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
                             Trip trip = documentSnapshot.toObject(Trip.class);
                             tripList.add(trip);
                         }
+                        emptyState(tripList.size() < 1);
                         progressBar(false);
                         tripAdapter = new TripAdapter(BusScheduleActivity.this, tripList);
                         tripAdapter.notifyDataSetChanged();
